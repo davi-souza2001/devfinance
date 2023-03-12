@@ -1,1 +1,1 @@
-- [o] Fazer todo o layout
+- [] Fazer todo o layout
