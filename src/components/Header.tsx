@@ -1,28 +1,29 @@
-import { Button, Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
+import { Menu, MenuButton, MenuItem, MenuList } from '@chakra-ui/react'
 import Image from 'next/image'
 
 import Logo from '../../public/Logo.svg'
 
 export function Header() {
 	return (
-		<div className='h-16 w-full bg-red-500 flex items-center justify-between'>
-			<div className='h-full w-40 bg-yellow-500 flex items-center justify-around text-lg'>
+		<div className='h-16 w-full bg-purpleHeader flex items-center justify-between text-white'>
+			<div className='h-full w-40 flex items-center justify-around text-lg font-semibold'>
 				<Image alt='Logo' src={Logo} />
 				<p>Devfinance</p>
 			</div>
-			<div className='h-full w-40 bg-yellow-300 flex items-center justify-end'>
-				<Menu>
-					<MenuButton as={Button} >
-						Actions
-					</MenuButton>
-					<MenuList>
-						<MenuItem>Download</MenuItem>
-						<MenuItem>Create a Copy</MenuItem>
-						<MenuItem>Mark as Draft</MenuItem>
-						<MenuItem>Delete</MenuItem>
-						<MenuItem>Attend a Workshop</MenuItem>
-					</MenuList>
-				</Menu>
+			<div className='h-full w-40 flex items-center justify-end font-medium'>
+				<div className='mr-5'>
+					<Menu>
+						<MenuButton>
+							Actions
+						</MenuButton>
+						<MenuList className='bg-purpleDefault border-none outline-none'>
+							<MenuItem>Home</MenuItem>
+							<MenuItem>My Wallet</MenuItem>
+							<MenuItem>My Expenses</MenuItem>
+							<MenuItem>My Account</MenuItem>
+						</MenuList>
+					</Menu>
+				</div>
 			</div>
 		</div>
 	)

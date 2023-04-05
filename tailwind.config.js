@@ -11,13 +11,8 @@ module.exports = {
   theme: {
     extend:{
       colors: {
-        'background': '#2B2245',
-        'rosa': '#DD61E8',
-        'roxo': '#9461E8',
-        'vermelho': '#E86161',
-        'verde': '#7CE861',
-        'amarelo': '#FFD56A',
-        'laranja': '#FF9D43',
+        'purpleHeader': '#1D1D41',
+        'purpleDefault': '#141332',
       },
     },
     fontFamily: {
