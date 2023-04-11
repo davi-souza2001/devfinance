@@ -12,7 +12,8 @@ module.exports = {
     extend:{
       colors: {
         'purpleHeader': '#1D1D41',
-        'purpleDefault': '#141332',
+        'purpleLight': '#6359E9',
+        'purpleDefault': '#141332'
       },
     },
     fontFamily: {

@@ -1,8 +1,10 @@
 'use client'
 
-import { Header } from '@/components/Header'
 import { CacheProvider } from '@chakra-ui/next-js'
 import { ChakraProvider } from '@chakra-ui/react'
+
+import { Header } from '@/components/Header'
+import { AuthProvider } from '../service/context/AuthContext'
 
 import './globals.css'
 
@@ -14,12 +16,14 @@ export default function RootLayout(props: RootLayoutProps) {
 	return (
 		<html>
 			<body className='font-poppins'>
-				<CacheProvider>
-					<ChakraProvider>
-						<Header />
-						{props.children}
-					</ChakraProvider>
-				</CacheProvider>
+				<AuthProvider>
+					<CacheProvider>
+						<ChakraProvider>
+							{/* <Header /> */}
+							{props.children}
+						</ChakraProvider>
+					</CacheProvider>
+				</AuthProvider>
 			</body>
 		</html>
 	)
