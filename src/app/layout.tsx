@@ -19,7 +19,7 @@ export default function RootLayout(props: RootLayoutProps) {
 				<AuthProvider>
 					<CacheProvider>
 						<ChakraProvider>
-							{/* <Header /> */}
+							<Header />
 							{props.children}
 						</ChakraProvider>
 					</CacheProvider>
