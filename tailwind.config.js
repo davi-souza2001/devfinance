@@ -13,7 +13,8 @@ module.exports = {
       colors: {
         'purpleHeader': '#1D1D41',
         'purpleLight': '#6359E9',
-        'purpleDefault': '#141332'
+        'purpleDefault': '#141332',
+        'blueLight': '#64CFF6'
       },
     },
     fontFamily: {

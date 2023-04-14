@@ -19,8 +19,10 @@ export default function RootLayout(props: RootLayoutProps) {
 				<AuthProvider>
 					<CacheProvider>
 						<ChakraProvider>
-							<Header />
-							{props.children}
+							<div className='h-screen w-screen xl:flex'>
+								<Header />
+								{props.children}
+							</div>
 						</ChakraProvider>
 					</CacheProvider>
 				</AuthProvider>
