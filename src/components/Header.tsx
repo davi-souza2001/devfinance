@@ -8,7 +8,7 @@ import Logo from '../../public/Logo.svg'
 
 export function Header() {
 	return (
-		<div className='h-16 w-full bg-purpleHeader flex items-center justify-between text-white xl:h-full xl:w-72 xl:items-start xl:justify-start xl:flex-col'>
+		<div className='h-16 w-full bg-purpleHeader flex items-center justify-between text-white xl:h-full xl:w-80 xl:items-start xl:justify-start xl:flex-col'>
 			<div className='h-full w-40 flex items-center justify-around text-lg font-semibold xl:h-28 xl:w-full xl:justify-start xl:text-2xl'>
 				<Image alt='Logo' src={Logo} className='xl:mx-3' />
 				<p className='xl:mt-2'>Devfinance</p>
