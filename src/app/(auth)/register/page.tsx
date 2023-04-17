@@ -3,8 +3,6 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from 'zod'
 
-import { Background } from "@/components/Background"
-
 const createUserFormSchema = z.object({
 	name: z.string()
 		.nonempty('O nome é obrigatório!')
@@ -34,7 +32,7 @@ export default function Register() {
 	}
 
 	return (
-		<Background>
+		<div className="h-screen w-screen bg-purpleDefault text-white font-poppins">
 			<div className="h-20 w-full flex items-center justify-center font-semibold text-2xl">
 				<p>Register</p>
 			</div>
@@ -79,6 +77,6 @@ export default function Register() {
 					Criar
 				</button>
 			</form>
-		</Background>
+		</div>
 	)
 }
