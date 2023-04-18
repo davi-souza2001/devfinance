@@ -1,5 +1,5 @@
 'use client'
-import { Stat, StatArrow, StatHelpText, StatLabel, StatNumber } from "@chakra-ui/react"
+import { Stat, StatArrow, StatNumber, Table, TableCaption, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr } from "@chakra-ui/react"
 import { HiArrowCircleDown, HiArrowCircleUp } from "react-icons/hi"
 
 export default function Home() {
@@ -9,7 +9,7 @@ export default function Home() {
 				<span className="text-xl font-semibold">Welcome, Davi Souza! ✌️</span>
 				<span className="font-light text-slate-400">Here's what's happening with your patrimony today.</span>
 			</div>
-			<div className="w-full lg:w-2/3 p-5 flex flex-col items-start justify-center bg-red-500">
+			<div className="w-full lg:w-2/3 p-5 flex flex-col items-start justify-center ">
 				<div className="w-full flex items-start justify-around">
 					<div className="h-20 w-40 flex items-center justify-around bg-purpleHeader rounded-md lg:w-72">
 						<HiArrowCircleDown className="text-4xl mr-[-30px] text-teal-200 xl:text-6xl" />
@@ -43,6 +43,37 @@ export default function Home() {
 							</div>
 						</div>
 					</div>
+				</div>
+				<div className="w-full mt-10 p-5 bg-purpleHeader">
+					<span className="text-xl font-semibold">Transactions</span>
+					<TableContainer>
+						<Table variant='simple'>
+							<Thead>
+								<Tr>
+									<Th>To convert</Th>
+									<Th>into</Th>
+									<Th isNumeric>multiply by</Th>
+								</Tr>
+							</Thead>
+							<Tbody>
+								<Tr>
+									<Td>inches</Td>
+									<Td>millimetres (mm)</Td>
+									<Td isNumeric>25.4</Td>
+								</Tr>
+								<Tr>
+									<Td>feet</Td>
+									<Td>centimetres (cm)</Td>
+									<Td isNumeric>30.48</Td>
+								</Tr>
+								<Tr>
+									<Td>yards</Td>
+									<Td>metres (m)</Td>
+									<Td isNumeric>0.91444</Td>
+								</Tr>
+							</Tbody>
+						</Table>
+					</TableContainer>
 				</div>
 			</div>
 		</div>
