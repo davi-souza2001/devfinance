@@ -32,7 +32,7 @@ export default function Register() {
 	}
 
 	return (
-		<div className="h-screen w-screen bg-purpleDefault text-white font-poppins">
+		<div className="h-full w-full bg-purpleDefault text-white font-poppins">
 			<div className="h-20 w-full flex items-center justify-center font-semibold text-2xl">
 				<p>Register</p>
 			</div>
