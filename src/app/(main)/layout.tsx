@@ -4,9 +4,9 @@ import { CacheProvider } from '@chakra-ui/next-js'
 import { ChakraProvider } from '@chakra-ui/react'
 
 import { Header } from '@/components/Header'
-import { AuthProvider } from '../service/context/AuthContext'
+import { AuthProvider } from '../../service/context/AuthContext'
 
-import './globals.css'
+import '../globals.css'
 
 interface RootLayoutProps {
 	children: React.ReactNode
@@ -19,8 +19,8 @@ export default function RootLayout(props: RootLayoutProps) {
 				<AuthProvider>
 					<CacheProvider>
 						<ChakraProvider>
-							<div className='h-full w-full lg:flex'>
-								<Header />
+							<div className='lg:flex'>
+								<Header/>
 								{props.children}
 							</div>
 						</ChakraProvider>

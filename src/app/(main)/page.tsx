@@ -1,5 +1,5 @@
 'use client'
-import { Stat, StatArrow, StatNumber, Table, TableCaption, TableContainer, Tbody, Td, Tfoot, Th, Thead, Tr } from "@chakra-ui/react"
+import { Stat, StatArrow, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
 import { HiArrowCircleDown, HiArrowCircleUp } from "react-icons/hi"
 
 export default function Home() {

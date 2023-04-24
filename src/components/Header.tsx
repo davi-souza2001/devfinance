@@ -35,13 +35,12 @@ export function Header() {
 			<div className='hidden lg:flex h-14 w-full items-center justify-center mt-8'>
 				<div className='h-0.5 w-5/6 bg-purpleLight' />
 			</div>
-			<div className='hidden lg:flex h-14 w-full items-center justify-center mt-8'>
+			<div className='hidden lg:flex h-14 w-full items-center justify-center my-8'>
 				<div className='h-full w-5/6 flex items-center justify-start p-5 rounded-md bg-purpleLight cursor-pointer hover:bg-violet-700 transition-all'>
 					<HiOutlineUserCircle className='h-8 w-8 mr-2' />
 					<p className='font-medium'>Davi Souza</p>
 				</div>
 			</div>
-
 
 			<div className='h-full w-40 flex items-center justify-end font-medium lg:hidden'>
 				<div className='mr-5'>
