@@ -1,6 +1,6 @@
 'use client'
 import { DefaultBackground } from "@/components/DefaultBackground"
-import { Stat, StatArrow, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
+import { Progress, Stat, StatArrow, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
 import { HiArrowCircleDown, HiArrowCircleUp } from "react-icons/hi"
 
 export default function Home() {
@@ -45,7 +45,22 @@ export default function Home() {
 						</div>
 					</div>
 				</div>
-				<div className="w-full mt-10 p-5 bg-purpleHeader">
+				<div className="w-full flex flex-col mt-10 p-5 bg-purpleHeader rounded">
+					<span className="text-xl mb-3 font-semibold">Analytics</span>
+					<span className="font-thin">Jan - R$ 52,00</span>
+					<Progress colorScheme='blue' height='22px' value={20} className="mb-3 rounded outline-none border-none"/>
+					<span className="font-thin">Fev - R$ 52,00</span>
+					<Progress colorScheme='blue' height='22px' value={20} className="mb-3 rounded outline-none border-none"/>
+					<span className="font-thin">Mar - R$ 52,00</span>
+					<Progress colorScheme='blue' height='22px' value={20} className="mb-3 rounded outline-none border-none"/>
+					<span className="font-thin">Abr - R$ 52,00</span>
+					<Progress colorScheme='blue' height='22px' value={20} className="mb-3 rounded outline-none border-none"/>
+					<span className="font-thin">Mai - R$ 52,00</span>
+					<Progress colorScheme='blue' height='22px' value={20} className="mb-3 rounded outline-none border-none"/>
+					<span className="font-thin">Jun - R$ 52,00</span>
+					<Progress colorScheme='blue' height='22px' value={20} className="mb-3 rounded outline-none border-none"/>
+				</div>
+				<div className="w-full mt-10 p-5 bg-purpleHeader rounded">
 					<span className="text-xl font-semibold">Transactions</span>
 					<TableContainer>
 						<Table variant='simple'>
