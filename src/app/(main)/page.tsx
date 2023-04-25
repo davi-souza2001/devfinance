@@ -8,7 +8,7 @@ export default function Home() {
 		<DefaultBackground>
 			<div className="h-24 w-full p-5 flex flex-col items-start justify-center">
 				<span className="text-xl font-semibold">Welcome, Davi Souza! ✌️</span>
-				<span className="font-light text-slate-400">Here's what's happening with your patrimony today.</span>
+				<span className="font-light text-slate-400">Here is what is happening with your patrimony today.</span>
 			</div>
 			<div className="w-full lg:w-2/3 p-5 flex flex-col items-start justify-center ">
 				<div className="w-full flex items-start justify-around">
