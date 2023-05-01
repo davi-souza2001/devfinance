@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import { Menu, MenuButton, MenuList } from '@chakra-ui/react'
-import { HiOutlineUserCircle, HiViewGrid } from "react-icons/hi"
+import { HiMenu, HiOutlineUserCircle, HiViewGrid } from "react-icons/hi"
 import { HiOutlineWallet } from "react-icons/hi2"
 import { TbMoneybag } from "react-icons/tb"
 
@@ -31,7 +31,7 @@ export function Header() {
 			<div className='hidden lg:flex h-14 w-full items-center justify-center mt-8'>
 				<div className='h-full w-5/6 flex items-center justify-start p-5 rounded-md bg-purpleLight cursor-pointer hover:bg-violet-700 transition-all'>
 					<TbMoneybag className='h-8 w-8 mr-2' />
-					<p className='font-medium'>My Expenses</p>
+					<p className='font-medium'>My Transactions</p>
 				</div>
 			</div>
 			<div className='hidden lg:flex h-14 w-full items-center justify-center mt-8'>
@@ -47,13 +47,13 @@ export function Header() {
 			<div className='h-full w-40 flex items-center justify-end font-medium lg:hidden'>
 				<div className='mr-5'>
 					<Menu>
-						<MenuButton>
-							Actions
+						<MenuButton className='flex items-center justify-center'>
+							<HiMenu className='text-3xl'/>
 						</MenuButton>
 						<MenuList className='bg-purpleDefault border-none outline-none flex flex-col'>
 							<Link href={'/'}>Dashboard</Link>
 							<Link href={'/myWallet'}>My Wallet</Link>
-							<Link href={'/'}>My Expenses</Link>
+							<Link href={'/'}>My Transactions</Link>
 							<Link href={'/'}>Profile</Link>
 						</MenuList>
 					</Menu>
