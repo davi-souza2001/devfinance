@@ -51,10 +51,10 @@ export function Header() {
 							<HiMenu className='text-3xl'/>
 						</MenuButton>
 						<MenuList className='bg-purpleDefault border-none outline-none flex flex-col'>
-							<Link href={'/'}>Dashboard</Link>
-							<Link href={'/myWallet'}>My Wallet</Link>
-							<Link href={'/'}>My Transactions</Link>
-							<Link href={'/'}>Profile</Link>
+							<Link href={'/'} className="p-2">Dashboard</Link>
+							<Link href={'/myWallet'} className="p-2">My Wallet</Link>
+							<Link href={'/'} className="p-2">My Transactions</Link>
+							<Link href={'/'} className="p-2">Profile</Link>
 						</MenuList>
 					</Menu>
 				</div>
