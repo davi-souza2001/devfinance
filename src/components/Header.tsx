@@ -53,7 +53,7 @@ export function Header() {
 						<MenuList className='bg-purpleDefault border-none outline-none flex flex-col'>
 							<Link href={'/'} className="p-2">Dashboard</Link>
 							<Link href={'/myWallet'} className="p-2">My Wallet</Link>
-							<Link href={'/'} className="p-2">My Transactions</Link>
+							<Link href={'/transactions'} className="p-2">My Transactions</Link>
 							<Link href={'/'} className="p-2">Profile</Link>
 						</MenuList>
 					</Menu>
