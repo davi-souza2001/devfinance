@@ -54,7 +54,7 @@ export function Header() {
 							<Link href={'/'} className="p-2">Dashboard</Link>
 							<Link href={'/myWallet'} className="p-2">My Wallet</Link>
 							<Link href={'/transactions'} className="p-2">My Transactions</Link>
-							<Link href={'/account'} className="p-2">Profile</Link>
+							<Link href={'/account'} className="p-2">Account</Link>
 						</MenuList>
 					</Menu>
 				</div>
