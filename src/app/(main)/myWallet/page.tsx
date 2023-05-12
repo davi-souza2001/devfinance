@@ -1,7 +1,7 @@
 'use client'
 import { DefaultBackground } from "@/components/DefaultBackground"
 import { Table, TableContainer, Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
-import { HiCurrencyDollar, HiMinusCircle, HiPencil, HiPlusCircle, HiSortAscending } from "react-icons/hi"
+import { HiCurrencyDollar, HiMinusCircle, HiPlusCircle, HiSortAscending } from "react-icons/hi"
 
 export default function MyWallet() {
 	return (
