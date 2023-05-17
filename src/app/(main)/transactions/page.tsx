@@ -42,7 +42,7 @@ export default function Transactions() {
 			<div className="w-3/3 lg:w-1/2 flex flex-col m-10 p-5 bg-purpleHeader rounded">
 				<span className="text-xl font-semibold">Fixed Expenses</span>
 				<TableContainer>
-					<Table variant='simple' size={"sm"}>
+					<Table variant='simple' size={"lg"}>
 						<Thead>
 							<Tr>
 								<Th>Name</Th>
