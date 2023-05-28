@@ -9,7 +9,7 @@ Ele deve consultar para verificar quanto eu terei se comprar x coisa
 
 <!-- 
 - [x] Mudar páginas para server side
-- [] Aprender a consumir api com o next 13
+- [x] Aprender a consumir api com o next 13
 - [] criar página de login (interface e rota)
 - [] fazer primeiras chamadas para criar transferences 
 -->
