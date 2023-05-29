@@ -23,7 +23,14 @@ export default function Login() {
 		resolver: zodResolver(createUserFormSchema)
 	})
 
-	function loginUser(data: any) {
+	async function onSubmit(data: any) {
+		// const response = await fetch('http://localhost:3333/user/login', {
+		// 	method: 'POST',
+		// 	body: JSON.stringify(data),
+		// })
+		// const message = await response.json()
+
+		// console.log(message)
 		console.log(data)
 	}
 
@@ -33,7 +40,7 @@ export default function Login() {
 				<div className="h-96 w-96 flex flex-col items-center justify-around rounded-md p-5 bg-white">
 					<p className="text-black text-2xl font-semibold">Login to your account</p>
 					<form
-						onSubmit={handleSubmit(loginUser)}
+						onSubmit={handleSubmit(onSubmit)}
 						className="flex flex-col items-center justify-center gap-4 mt-2"
 					>
 						<div className="flex flex-col gap-1 text-black">
@@ -60,7 +67,7 @@ export default function Login() {
 							type="submit"
 							className="h-10 w-32 bg-emerald-500 rounded font-semibold hover:bg-emerald-600"
 						>
-							Create
+							Login
 						</button>
 					</form>
 					<p className="text-black font-thin">
