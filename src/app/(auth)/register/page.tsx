@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import { DefaultBackground } from "@/components/DefaultBackground"
+import UseAuth from "@/service/hooks/useAuth"
+import Router from "next/router"
 
 const createUserFormSchema = z.object({
 	name: z.string()
@@ -26,12 +28,16 @@ const createUserFormSchema = z.object({
 type CreateUserFOrmData = z.infer<typeof createUserFormSchema>
 
 export default function Register() {
+	const { user, registerUser } = UseAuth()
 	const { register, handleSubmit, formState: { errors } } = useForm<CreateUserFOrmData>({
 		resolver: zodResolver(createUserFormSchema)
 	})
 
-	function loginUser(data: any) {
+	async function loginUser(data: any) {
 		console.log(data)
+		await registerUser(data)
+
+		// Router.push('/')
 	}
 
 	return (
@@ -47,7 +53,7 @@ export default function Register() {
 							<label htmlFor="name" className="font-semibold text-xl">Name</label>
 							<input
 								className="h-10 w-72 border border-zinc-200 shadow-sm rounded outline-none text-black"
-								type='password'
+								type='text'
 								{...register('name')}
 							/>
 							{errors.name && <span>{errors.name.message}</span>}

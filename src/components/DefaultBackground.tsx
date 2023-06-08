@@ -4,7 +4,7 @@ interface defaultBackgroundProps {
 
 export function DefaultBackground(props: defaultBackgroundProps) {
 	return (
-		<div className="h-full w-full text-white bg-purpleDefault overflow-y-auto">
+		<div className="h-screen w-screen text-white bg-purpleDefault overflow-y-auto">
 			{props.children}
 		</div>
 	)
