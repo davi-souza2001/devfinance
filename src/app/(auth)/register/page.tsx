@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 
 import { DefaultBackground } from "@/components/DefaultBackground"
 import UseAuth from "@/service/hooks/useAuth"
-import Router from "next/router"
+import { useRouter } from "next/navigation"
 
 const createUserFormSchema = z.object({
 	name: z.string()
@@ -28,14 +28,15 @@ const createUserFormSchema = z.object({
 type CreateUserFOrmData = z.infer<typeof createUserFormSchema>
 
 export default function Register() {
-	const { user, registerUser } = UseAuth()
+	const { push } = useRouter()
+	const { registerUser } = UseAuth()
 	const { register, handleSubmit, formState: { errors } } = useForm<CreateUserFOrmData>({
 		resolver: zodResolver(createUserFormSchema)
 	})
 
 	async function handleRegisterUser(data: any) {
 		await registerUser(data)
-		Router.push('/')
+		push('/')
 	}
 
 	return (
