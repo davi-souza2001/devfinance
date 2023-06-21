@@ -29,9 +29,6 @@ export default function Login() {
 		// 	body: JSON.stringify(data),
 		// })
 		// const message = await response.json()
-
-		// console.log(message)
-		console.log(data)
 	}
 
 	return (

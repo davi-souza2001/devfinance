@@ -33,11 +33,9 @@ export default function Register() {
 		resolver: zodResolver(createUserFormSchema)
 	})
 
-	async function loginUser(data: any) {
-		console.log(data)
+	async function handleRegisterUser(data: any) {
 		await registerUser(data)
-
-		// Router.push('/')
+		Router.push('/')
 	}
 
 	return (
@@ -46,7 +44,7 @@ export default function Register() {
 				<div className="h-[27rem] w-96 flex flex-col items-center justify-around rounded-md p-5 bg-white">
 					<p className="text-black text-2xl font-semibold">Create an account</p>
 					<form
-						onSubmit={handleSubmit(loginUser)}
+						onSubmit={handleSubmit(handleRegisterUser)}
 						className="flex flex-col items-center justify-center gap-4 mt-2"
 					>
 						<div className="flex flex-col gap-1 text-black">
