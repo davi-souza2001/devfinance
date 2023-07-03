@@ -48,7 +48,7 @@ export function Header() {
 				<div className='mr-5'>
 					<Menu>
 						<MenuButton className='flex items-center justify-center'>
-							<HiMenu className='text-3xl'/>
+							<HiMenu className='text-3xl' />
 						</MenuButton>
 						<MenuList className='bg-purpleDefault border-none outline-none flex flex-col'>
 							<Link href={'/'} className="p-2">Dashboard</Link>

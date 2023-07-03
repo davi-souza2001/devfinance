@@ -8,10 +8,11 @@ Ele deve consultar para verificar quanto eu terei se comprar x coisa
 -->
 
 <!-- 
-- [x] Mudar páginas para server side
-- [x] Aprender a consumir api com o next 13
-- [] criar página de login (interface e rota)
-- [] fazer primeiras chamadas para criar transferences 
-- [] tirar context da aplicação
-- [] mudar layout para layouts feitos
+- [] Usar de base para nova tela de login (https://tailwindui.com/components/marketing/sections/cta-sections)
+- [] Adicionar novo form (https://tailwindui.com/components/application-ui/forms/form-layouts)
+- [] Colocar campo de pesquisa nas notas (https://tailwindui.com/components/marketing/sections/newsletter-sections)
+- [] Adicionar novo dashboard (https://windstatic.com/sidebars#)
+- [] Adicionar páginas 404 (https://tailwindui.com/components/marketing/feedback/404-pages)
+- [] Configurar eslint no back e no 
+- [] Adicionar novas rotas para calcular as funções
 -->
