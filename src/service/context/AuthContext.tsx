@@ -15,6 +15,7 @@ interface User {
 interface AuthContextProps {
 	user: User
 	registerUser: (data: User) => Promise<void>
+	loginUser: (data: User) => Promise<void>
 }
 
 const AuthContext = createContext<AuthContextProps>({
@@ -23,7 +24,8 @@ const AuthContext = createContext<AuthContextProps>({
 		email: '',
 		password: ''
 	},
-	registerUser: async () => { }
+	registerUser: async () => { },
+	loginUser: async () => { }
 })
 
 const route = 'http://localhost:3333'
@@ -54,10 +56,29 @@ export function AuthProvider(props: any) {
 		setCookie(tokenBase, userToken.token)
 	}
 
+	async function loginUser(data: User) {
+		const response = await fetch(`${route}/user/login`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(data)
+		})
+
+		const userToken = await response.json()
+
+		const user = decode(userToken.token) as User
+
+		setUser(user)
+
+		setCookie(tokenBase, userToken.token)
+	}
+
 	return (
 		<AuthContext.Provider value={{
 			user,
-			registerUser
+			registerUser,
+			loginUser
 		}}>
 			{props.children}
 		</AuthContext.Provider>

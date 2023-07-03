@@ -5,6 +5,8 @@ import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 
 import { DefaultBackground } from "@/components/DefaultBackground"
+import UseAuth from "@/service/hooks/useAuth"
+import { useRouter } from "next/navigation"
 
 const createUserFormSchema = z.object({
 	email: z.string()
@@ -19,16 +21,15 @@ const createUserFormSchema = z.object({
 type CreateUserFOrmData = z.infer<typeof createUserFormSchema>
 
 export default function Login() {
+	const { push } = useRouter()
+	const { loginUser } = UseAuth()
 	const { register, handleSubmit, formState: { errors } } = useForm<CreateUserFOrmData>({
 		resolver: zodResolver(createUserFormSchema)
 	})
 
-	async function onSubmit(data: any) {
-		// const response = await fetch('http://localhost:3333/user/login', {
-		// 	method: 'POST',
-		// 	body: JSON.stringify(data),
-		// })
-		// const message = await response.json()
+	async function handleLoginUser(data: any) {
+		await loginUser(data)
+		push('/')
 	}
 
 	return (
@@ -37,7 +38,7 @@ export default function Login() {
 				<div className="h-96 w-96 flex flex-col items-center justify-around rounded-md p-5 bg-white">
 					<p className="text-black text-2xl font-semibold">Login to your account</p>
 					<form
-						onSubmit={handleSubmit(onSubmit)}
+						onSubmit={handleSubmit(handleLoginUser)}
 						className="flex flex-col items-center justify-center gap-4 mt-2"
 					>
 						<div className="flex flex-col gap-1 text-black">
