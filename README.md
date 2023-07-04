@@ -8,7 +8,6 @@ Ele deve consultar para verificar quanto eu terei se comprar x coisa
 -->
 
 <!-- 
-- [] Usar de base para nova tela de login (https://tailwindui.com/components/marketing/sections/cta-sections)
 - [] Adicionar novo form (https://tailwindui.com/components/application-ui/forms/form-layouts)
 - [] Colocar campo de pesquisa nas notas (https://tailwindui.com/components/marketing/sections/newsletter-sections)
 - [] Adicionar novo dashboard (https://windstatic.com/sidebars#)
