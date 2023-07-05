@@ -33,7 +33,7 @@ const route = 'http://localhost:3333'
 const tokenBase = 'tokenAuthFinance'
 
 export function AuthProvider(props: any) {
-	const token = getCookie('tokenAuthFinance')?.toString()
+	const token = getCookie(tokenBase)?.toString()
 	const [user, setUser] = useState<User>({
 		name: '',
 		email: '',
