@@ -41,56 +41,6 @@ export default function Register() {
 
 	return (
 		<DefaultBackground>
-			{/* <div className="h-full w-full flex items-center justify-center bg-gradient-to-r from-indigo-900 ">
-				<div className="h-[27rem] w-96 flex flex-col items-center justify-around rounded-md p-5 bg-white">
-					<p className="text-black text-2xl font-semibold">Create an account</p>
-					<form
-						onSubmit={handleSubmit(handleRegisterUser)}
-						className="flex flex-col items-center justify-center gap-4 mt-2"
-					>
-						<div className="flex flex-col gap-1 text-black">
-							<label htmlFor="name" className="font-semibold text-xl">Name</label>
-							<input
-								className="h-10 w-72 border border-zinc-200 shadow-sm rounded outline-none text-black"
-								type='text'
-								{...register('name')}
-							/>
-							{errors.name && <span>{errors.name.message}</span>}
-						</div>
-
-						<div className="flex flex-col gap-1 text-black">
-							<label htmlFor="email" className="font-semibold text-xl">Email</label>
-							<input
-								className="h-10 w-72 border border-zinc-200 shadow-sm rounded outline-none text-black"
-								type='email'
-								{...register('email')}
-							/>
-							{errors.email && <span>{errors.email.message}</span>}
-						</div>
-
-						<div className="flex flex-col gap-1 text-black">
-							<label htmlFor="password" className="font-semibold text-xl">Password</label>
-							<input
-								className="h-10 w-72 border border-zinc-200 shadow-sm rounded outline-none text-black"
-								type='password'
-								{...register('password')}
-							/>
-							{errors.password && <span>{errors.password.message}</span>}
-						</div>
-
-						<button
-							type="submit"
-							className="h-10 w-32 bg-emerald-500 rounded font-semibold hover:bg-emerald-600"
-						>
-							Create
-						</button>
-					</form>
-					<p className="text-black font-thin">
-						Already have an account?&nbsp;
-						<Link href='/login' className="font-normal text-blue-400">Log In</Link>
-					</p>
-				</div>
-			</div> */}
 			<div className="h-full w-full relative isolate overflow-hidden bg-gray-900 shadow-2xl sm:rounded-3xl sm:px-16 md:pt-24 lg:flex lg:gap-x-20 lg:px-24 lg:pt-0">
 				<svg viewBox="0 0 1024 1024" className="absolute left-1/2 top-1/2 -z-10 h-[64rem] w-[64rem] -translate-y-1/2 [mask-image:radial-gradient(closest-side,white,transparent)] sm:left-full sm:-ml-80 lg:left-1/2 lg:ml-0 lg:-translate-x-1/2 lg:translate-y-0" aria-hidden="true">
 					<circle cx="512" cy="512" r="512" fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fillOpacity="0.7" />

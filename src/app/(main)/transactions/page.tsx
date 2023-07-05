@@ -23,18 +23,18 @@ export default function Transactions() {
 					<Modal isOpen={isOpen} onClose={onClose}>
 						<ModalOverlay />
 						<ModalContent>
-							<ModalHeader>Modal Title</ModalHeader>
-							<ModalCloseButton />
+							<ModalHeader>Transaction</ModalHeader>
 							<ModalBody>
-								Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloribus impedit
+								<ModalCloseButton className="hover:bg-red-400" />
+								<form className="flex flex-col items-start justify-center">
+									<label htmlFor="name" className="font-semibold text-lg">Name</label>
+									Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloribus impedit
+									<div className="w-full flex items-end justify-end">
+										<button className="p-2 rounded-md transition-all hover:bg-green-400">Submit</button>
+									</div>
+								</form>
 							</ModalBody>
 
-							<ModalFooter>
-								<Button colorScheme='blue' mr={3} onClick={onClose}>
-									Close
-								</Button>
-								<Button variant='ghost'>Secondary Action</Button>
-							</ModalFooter>
 						</ModalContent>
 					</Modal>
 				</div>
