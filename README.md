@@ -12,6 +12,7 @@ Ele deve consultar para verificar quanto eu terei se comprar x coisa
 - [] Colocar campo de pesquisa nas notas (https://tailwindui.com/components/marketing/sections/newsletter-sections)
 - [] Adicionar novo dashboard (https://windstatic.com/sidebars#)
 - [] Adicionar páginas 404 (https://tailwindui.com/components/marketing/feedback/404-pages)
-- [] Configurar eslint no back e no 
+- [] Configurar eslint no back e no front
+- [] Configurar loading
 - [] Adicionar novas rotas para calcular as funções
 -->

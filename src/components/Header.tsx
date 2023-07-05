@@ -7,8 +7,13 @@ import { TbMoneybag } from "react-icons/tb"
 
 import Logo from '../../public/Logo.svg'
 import Link from 'next/link'
+import UseAuth from '@/service/hooks/useAuth'
 
 export function Header() {
+	const { user } = UseAuth()
+
+	console.log(user)
+
 	return (
 		<div className='h-16 w-full bg-purpleHeader flex items-center justify-between text-white lg:h-full lg:w-80 lg:items-start lg:justify-start lg:flex-col'>
 			<Link href={'/'} className='h-full w-40 flex items-center justify-around text-lg font-semibold lg:h-28 lg:w-full lg:justify-start lg:text-2xl'>
@@ -23,13 +28,13 @@ export function Header() {
 				</Link>
 			</div>
 			<div className='hidden lg:flex h-14 w-full items-center justify-center mt-8'>
-				<Link href={'/myWallet'} className='h-full w-5/6 flex items-center justify-start p-5 rounded-md bg-purpleLight cursor-pointer hover:bg-violet-700 transition-all'>
+				<Link href={'/myWallet'} className='h-full w-5/6 flex items-center justify-start p-5 rounded-md  cursor-pointer hover:bg-violet-700 transition-all'>
 					<HiOutlineWallet className='h-8 w-8 mr-2' />
 					<p className='font-medium'>My Wallet</p>
 				</Link>
 			</div>
 			<div className='hidden lg:flex h-14 w-full items-center justify-center mt-8'>
-				<Link href={'/transactions'} className='h-full w-5/6 flex items-center justify-start p-5 rounded-md bg-purpleLight cursor-pointer hover:bg-violet-700 transition-all'>
+				<Link href={'/transactions'} className='h-full w-5/6 flex items-center justify-start p-5 rounded-md  cursor-pointer hover:bg-violet-700 transition-all'>
 					<TbMoneybag className='h-8 w-8 mr-2' />
 					<p className='font-medium'>My Transactions</p>
 				</Link>
@@ -40,7 +45,7 @@ export function Header() {
 			<div className='hidden lg:flex h-14 w-full items-center justify-center my-8'>
 				<Link href={'/account'} className='h-full w-5/6 flex items-center justify-start p-5 rounded-md bg-purpleLight cursor-pointer hover:bg-violet-700 transition-all'>
 					<HiOutlineUserCircle className='h-8 w-8 mr-2' />
-					<p className='font-medium'>Davi Souza</p>
+					<p className='font-medium'>{user?.name?.length ? user.name : 'usuário'}</p>
 				</Link>
 			</div>
 

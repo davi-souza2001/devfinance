@@ -1,8 +1,9 @@
 'use client'
-import { setCookie } from 'cookies-next'
-import { useState } from "react"
+import { setCookie, getCookie } from 'cookies-next'
+import { useEffect, useState } from "react"
 import { createContext } from "react"
 import decode from 'jwt-decode'
+import Router from 'next/router'
 
 interface User {
 	name: string
@@ -32,6 +33,7 @@ const route = 'http://localhost:3333'
 const tokenBase = 'tokenAuthFinance'
 
 export function AuthProvider(props: any) {
+	const token = getCookie('tokenAuthFinance')?.toString()
 	const [user, setUser] = useState<User>({
 		name: '',
 		email: '',
@@ -73,6 +75,15 @@ export function AuthProvider(props: any) {
 
 		setCookie(tokenBase, userToken.token)
 	}
+
+	useEffect(() => {
+		if (token) {
+			const user = decode(token) as any
+			setUser(user.payload)
+		} else {
+			Router.push('/login')
+		}
+	}, [token])
 
 	return (
 		<AuthContext.Provider value={{
