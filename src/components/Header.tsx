@@ -1,9 +1,9 @@
 'use client'
 import Image from 'next/image'
 import { Menu, MenuButton, MenuList } from '@chakra-ui/react'
-import { HiMenu, HiOutlineUserCircle, HiViewGrid } from "react-icons/hi"
-import { HiOutlineWallet } from "react-icons/hi2"
-import { TbMoneybag } from "react-icons/tb"
+import { HiMenu, HiOutlineUserCircle, HiViewGrid } from 'react-icons/hi'
+import { HiOutlineWallet } from 'react-icons/hi2'
+import { TbMoneybag } from 'react-icons/tb'
 
 import Logo from '../../public/Logo.svg'
 import Link from 'next/link'

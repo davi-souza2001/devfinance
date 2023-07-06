@@ -1,12 +1,12 @@
 'use client'
-import Link from "next/link"
+import Link from 'next/link'
 import { z } from 'zod'
-import { useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
 
-import { DefaultBackground } from "@/components/DefaultBackground"
-import UseAuth from "@/service/hooks/useAuth"
-import { useRouter } from "next/navigation"
+import { DefaultBackground } from '@/components/DefaultBackground'
+import UseAuth from '@/service/hooks/useAuth'
+import { useRouter } from 'next/navigation'
 
 const createUserFormSchema = z.object({
 	email: z.string()
@@ -39,8 +39,8 @@ export default function Login() {
 					<circle cx="512" cy="512" r="512" fill="url(#759c1415-0410-454c-8f7c-9a820de03641)" fillOpacity="0.7" />
 					<defs>
 						<radialGradient id="759c1415-0410-454c-8f7c-9a820de03641">
-							<stop stop-color="#7775D6" />
-							<stop offset="1" stop-color="#E935C1" />
+							<stop stopColor="#7775D6" />
+							<stop offset="1" stopColor="#E935C1" />
 						</radialGradient>
 					</defs>
 				</svg>
@@ -49,7 +49,7 @@ export default function Login() {
 					<p className="mt-6 text-xl leading-8 text-gray-300">Ac euismod vel sit maecenas id pellentesque eu sed consectetur. Malesuada adipiscing sagittis vel nulla.</p>
 					<div className="mt-10 flex flex-col items-center justify-center gap-x-6lg:justify-start">
 						<Link href="/register" className="rounded-md bg-white px-3.5 py-2.5 text-base font-semibold text-gray-900 shadow-sm mb-2 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Get started</Link>
-						<Link href="https://github.com/davi-souza2001/devfinance" target={"_blank"} className="text-base font-semibold leading-6 text-white">Learn more <span aria-hidden="true">→</span></Link>
+						<Link href="https://github.com/davi-souza2001/devfinance" target={'_blank'} className="text-base font-semibold leading-6 text-white">Learn more <span aria-hidden="true">→</span></Link>
 					</div>
 				</div>
 				<div className="h-full w-full lg:w-1/2 flex flex-col items-center justify-center">

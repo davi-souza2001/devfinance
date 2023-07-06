@@ -1,16 +1,20 @@
 'use client'
 import { setCookie, getCookie } from 'cookies-next'
-import { useEffect, useState } from "react"
-import { createContext } from "react"
+import { useEffect, useState } from 'react'
+import { createContext } from 'react'
 import decode from 'jwt-decode'
 import Router from 'next/router'
 
-interface User {
+export interface User {
 	name: string
 	email: string
 	password: string
 	patrimony?: number
 	salary?: number
+}
+
+interface UserResponse {
+	payload: User
 }
 
 interface AuthContextProps {
@@ -25,14 +29,20 @@ const AuthContext = createContext<AuthContextProps>({
 		email: '',
 		password: ''
 	},
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	registerUser: async () => { },
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	loginUser: async () => { }
 })
 
 const route = 'http://localhost:3333'
 const tokenBase = 'tokenAuthFinance'
 
-export function AuthProvider(props: any) {
+interface AuthProps {
+	children: React.ReactNode
+}
+
+export function AuthProvider(props: AuthProps) {
 	const token = getCookie(tokenBase)?.toString()
 	const [user, setUser] = useState<User>({
 		name: '',
@@ -78,7 +88,7 @@ export function AuthProvider(props: any) {
 
 	useEffect(() => {
 		if (token) {
-			const user = decode(token) as any
+			const user = decode(token) as UserResponse
 			setUser(user.payload)
 		} else {
 			Router.push('/login')

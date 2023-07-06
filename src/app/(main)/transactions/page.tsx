@@ -1,7 +1,7 @@
 'use client'
-import { DefaultBackground } from "@/components/DefaultBackground";
-import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Table, TableContainer, Tbody, Td, Th, Thead, Tr, useDisclosure } from "@chakra-ui/react";
-import { HiArrowNarrowLeft, HiArrowNarrowRight } from "react-icons/hi";
+import { DefaultBackground } from '@/components/DefaultBackground'
+import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Table, TableContainer, Tbody, Td, Th, Thead, Tr, useDisclosure } from '@chakra-ui/react'
+import { HiArrowNarrowLeft, HiArrowNarrowRight } from 'react-icons/hi'
 
 export default function Transactions() {
 	const { isOpen, onOpen, onClose } = useDisclosure()
@@ -49,7 +49,7 @@ export default function Transactions() {
 			<div className="w-3/3 lg:w-1/2 flex flex-col m-10 p-5 bg-purpleHeader rounded">
 				<span className="text-xl font-semibold">Fixed Expenses</span>
 				<TableContainer>
-					<Table variant='simple' size={"lg"}>
+					<Table variant='simple' size={'lg'}>
 						<Thead>
 							<Tr>
 								<Th>Name</Th>
