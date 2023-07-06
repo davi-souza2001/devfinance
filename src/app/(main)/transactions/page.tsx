@@ -25,12 +25,19 @@ export default function Transactions() {
 						<ModalContent>
 							<ModalHeader>Transaction</ModalHeader>
 							<ModalBody>
-								<ModalCloseButton className="hover:bg-red-400" />
+								<ModalCloseButton className="bg-red-400 hover:bg-red-300" />
 								<form className="flex flex-col items-start justify-center">
-									<label htmlFor="name" className="font-semibold text-lg">Name</label>
-									Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloribus impedit
+									<label htmlFor="name" className="font-semibold text-lg mb-2">Name</label>
+									<input type="text" className="h-7 bg-slate-200 mb-2 border-none outline-none" />
+									<label htmlFor="value" className="font-semibold text-lg mb-2">Value</label>
+									<input type="number" className="h-7 w-28 bg-slate-200 border-none outline-none" />
+									<label htmlFor="recurrent" className="font-semibold text-lg mb-2">Recurrent</label>
+									<select name="recurrent" id="recurrent" className="h-7 w-28 bg-slate-200 border-none outline-none">
+										<option value="yes">Yes</option>
+										<option value="no">No</option>
+									</select>
 									<div className="w-full flex items-end justify-end">
-										<button className="p-2 rounded-md transition-all hover:bg-green-400">Submit</button>
+										<button className="p-2 font-semibold rounded-md transition-all bg-green-400 hover:bg-green-300">Submit</button>
 									</div>
 								</form>
 							</ModalBody>
