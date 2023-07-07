@@ -9,6 +9,5 @@ Ele deve consultar para verificar quanto eu terei se comprar x coisa
 
 <!-- 
 - [] Adicionar novo dashboard (https://windstatic.com/sidebars#)
-- [] Configurar loading
 - [] Adicionar novas rotas para calcular as funções
 -->

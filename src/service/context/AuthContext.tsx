@@ -18,6 +18,7 @@ interface UserResponse {
 
 interface AuthContextProps {
 	user: User
+	loading: boolean
 	registerUser: (data: User) => Promise<void>
 	loginUser: (data: User) => Promise<void>
 }
@@ -28,6 +29,7 @@ const AuthContext = createContext<AuthContextProps>({
 		email: '',
 		password: ''
 	},
+	loading: false,
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	registerUser: async () => { },
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -43,6 +45,7 @@ interface AuthProps {
 
 export function AuthProvider(props: AuthProps) {
 	const token = getCookie(tokenBase)?.toString()
+	const [loading, setLoading] = useState<boolean>(false)
 	const [user, setUser] = useState<User>({
 		name: '',
 		email: '',
@@ -50,6 +53,7 @@ export function AuthProvider(props: AuthProps) {
 	})
 
 	async function registerUser(data: User) {
+		setLoading(true)
 		const response = await fetch(`${route}/user/create`, {
 			method: 'POST',
 			headers: {
@@ -65,9 +69,11 @@ export function AuthProvider(props: AuthProps) {
 		setUser(user)
 
 		setCookie(tokenBase, userToken.token)
+		setLoading(false)
 	}
 
 	async function loginUser(data: User) {
+		setLoading(true)
 		const response = await fetch(`${route}/user/login`, {
 			method: 'POST',
 			headers: {
@@ -83,18 +89,22 @@ export function AuthProvider(props: AuthProps) {
 		setUser(user)
 
 		setCookie(tokenBase, userToken.token)
+		setLoading(false)
 	}
 
 	useEffect(() => {
+		setLoading(true)
 		if (token) {
 			const user = decode(token) as UserResponse
 			setUser(user.payload)
 		}
+		setLoading(false)
 	}, [token])
 
 	return (
 		<AuthContext.Provider value={{
 			user,
+			loading,
 			registerUser,
 			loginUser
 		}}>

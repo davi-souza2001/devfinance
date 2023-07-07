@@ -1,7 +1,7 @@
 'use client'
 import Image from 'next/image'
 import { Menu, MenuButton, MenuList } from '@chakra-ui/react'
-import { HiMenu, HiOutlineUserCircle, HiViewGrid } from 'react-icons/hi'
+import { HiMenu, HiOutlineRefresh, HiOutlineUserCircle, HiViewGrid } from 'react-icons/hi'
 import { HiOutlineWallet } from 'react-icons/hi2'
 import { TbMoneybag } from 'react-icons/tb'
 
@@ -15,10 +15,11 @@ interface Dashboard {
 }
 
 export function Header() {
-	const { user } = UseAuth()
+	const { user, loading } = UseAuth()
 	const [optionSelected, setOptionSelected] = useState<Dashboard>({ option: '' })
 
 	return (
+
 		<div className='h-16 w-full bg-purpleHeader flex items-center justify-between text-white lg:h-full lg:w-80 lg:items-start lg:justify-start lg:flex-col'>
 			<Link href={'/'} onClick={() => setOptionSelected({ option: 'Dashboard' })} className='h-full w-40 flex items-center justify-around text-lg font-semibold lg:h-28 lg:w-full lg:justify-start lg:text-2xl'>
 				<Image alt='Logo' src={Logo} className='lg:mx-3' />
@@ -49,7 +50,11 @@ export function Header() {
 			<div className='hidden lg:flex h-14 w-full items-center justify-center my-8' onClick={() => setOptionSelected({ option: 'Account' })}>
 				<Link href={'/account'} className={`h-full w-5/6 flex items-center justify-start p-5 rounded-md ${optionSelected.option === 'Account' && 'bg-purpleLight'} cursor-pointer hover:bg-violet-700 transition-all`}>
 					<HiOutlineUserCircle className='h-8 w-8 mr-2' />
-					<p className='font-medium'>{user?.name?.length ? user.name : 'usuário'}</p>
+					{loading ? (
+						<HiOutlineRefresh className='animate-spin text-2xl' />
+					) : (
+						<p className='font-medium'>{user?.name?.length ? user.name : 'no user'}</p>
+					)}
 				</Link>
 			</div>
 
