@@ -90,8 +90,6 @@ export function AuthProvider(props: AuthProps) {
 		if (token) {
 			const user = decode(token) as UserResponse
 			setUser(user.payload)
-		} else {
-			Router.push('/login')
 		}
 	}, [token])
 

@@ -11,16 +11,16 @@ import UseAuth from '@/service/hooks/useAuth'
 import { useState } from 'react'
 
 interface Dashboard {
-	option: 'Dashboard' | 'My Wallet' | 'My Transactions' | 'Account'
+	option: 'Dashboard' | 'My Wallet' | 'My Transactions' | 'Account' | ''
 }
 
 export function Header() {
 	const { user } = UseAuth()
-	const [optionSelected, setOptionSelected] = useState<Dashboard>({ option: 'Dashboard' })
+	const [optionSelected, setOptionSelected] = useState<Dashboard>({ option: '' })
 
 	return (
 		<div className='h-16 w-full bg-purpleHeader flex items-center justify-between text-white lg:h-full lg:w-80 lg:items-start lg:justify-start lg:flex-col'>
-			<Link href={'/'} className='h-full w-40 flex items-center justify-around text-lg font-semibold lg:h-28 lg:w-full lg:justify-start lg:text-2xl'>
+			<Link href={'/'} onClick={() => setOptionSelected({ option: 'Dashboard' })} className='h-full w-40 flex items-center justify-around text-lg font-semibold lg:h-28 lg:w-full lg:justify-start lg:text-2xl'>
 				<Image alt='Logo' src={Logo} className='lg:mx-3' />
 				<p className='lg:mt-2'>Devfinance</p>
 			</Link>

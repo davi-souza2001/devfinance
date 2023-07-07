@@ -28,11 +28,11 @@ export default function Transactions() {
 								<ModalCloseButton className="bg-red-400 hover:bg-red-300" />
 								<form className="flex flex-col items-start justify-center">
 									<label htmlFor="name" className="font-semibold text-lg mb-2">Name</label>
-									<input type="text" className="h-7 bg-slate-200 mb-2 border-none outline-none" />
+									<input type="text" className="h-7 bg-slate-200 mb-2 border-none outline-none rounded-sm mb-5" />
 									<label htmlFor="value" className="font-semibold text-lg mb-2">Value</label>
-									<input type="number" className="h-7 w-28 bg-slate-200 border-none outline-none" />
+									<input type="number" className="h-7 w-28 bg-slate-200 border-none outline-none rounded-sm mb-5" />
 									<label htmlFor="recurrent" className="font-semibold text-lg mb-2">Recurrent</label>
-									<select name="recurrent" id="recurrent" className="h-7 w-28 bg-slate-200 border-none outline-none">
+									<select name="recurrent" id="recurrent" className="h-7 w-28 bg-slate-200 border-none outline-none rounded-sm">
 										<option value="yes">Yes</option>
 										<option value="no">No</option>
 									</select>

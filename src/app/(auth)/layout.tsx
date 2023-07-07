@@ -10,7 +10,9 @@ export default function AuthLayout({
 	return (
 		<AuthProvider>
 			<html lang="en">
-				<body>{children}</body>
+				<body suppressHydrationWarning={true} >
+					{children}
+				</body>
 			</html>
 		</AuthProvider>
 	)

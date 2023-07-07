@@ -14,12 +14,12 @@ interface RootLayoutProps {
 export default function RootLayout(props: RootLayoutProps) {
 	return (
 		<html>
-			<body className='font-poppins'>
+			<body className='font-poppins' suppressHydrationWarning={true} >
 				<AuthProvider>
 					<CacheProvider>
 						<ChakraProvider>
 							<div className='h-screen w-screen lg:flex'>
-								<Header/>
+								<Header />
 								{props.children}
 							</div>
 						</ChakraProvider>
