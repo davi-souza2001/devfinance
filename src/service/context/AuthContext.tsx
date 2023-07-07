@@ -1,5 +1,5 @@
 'use client'
-import { setCookie, getCookie } from 'cookies-next'
+import { setCookie, getCookie, deleteCookie } from 'cookies-next'
 import { useEffect, useState } from 'react'
 import { createContext } from 'react'
 import decode from 'jwt-decode'
@@ -21,6 +21,7 @@ interface AuthContextProps {
 	loading: boolean
 	registerUser: (data: User) => Promise<void>
 	loginUser: (data: User) => Promise<void>
+	logoutUser: () => void
 }
 
 const AuthContext = createContext<AuthContextProps>({
@@ -33,7 +34,9 @@ const AuthContext = createContext<AuthContextProps>({
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	registerUser: async () => { },
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	loginUser: async () => { }
+	loginUser: async () => { },
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	logoutUser: () => { }
 })
 
 const route = 'http://localhost:3333'
@@ -92,6 +95,12 @@ export function AuthProvider(props: AuthProps) {
 		setLoading(false)
 	}
 
+	async function logoutUser() {
+		setLoading(true)
+		deleteCookie(tokenBase)
+		setLoading(false)
+	}
+
 	useEffect(() => {
 		setLoading(true)
 		if (token) {
@@ -106,7 +115,8 @@ export function AuthProvider(props: AuthProps) {
 			user,
 			loading,
 			registerUser,
-			loginUser
+			loginUser,
+			logoutUser
 		}}>
 			{props.children}
 		</AuthContext.Provider>

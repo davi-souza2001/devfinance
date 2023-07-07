@@ -1,10 +1,17 @@
 'use client'
 import { DefaultBackground } from '@/components/DefaultBackground'
-import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Table, TableContainer, Tbody, Td, Th, Thead, Tr, useDisclosure } from '@chakra-ui/react'
-import { HiOutlineUserCircle, HiPencil } from 'react-icons/hi'
+import UseAuth from '@/service/hooks/useAuth'
+import { TableContainer, Table, Thead, Tr, Th, Tbody, Td } from '@chakra-ui/react'
+import { useRouter } from 'next/navigation'
+import { HiOutlineUserCircle } from 'react-icons/hi'
 
 export default function Account() {
-	const { isOpen, onOpen, onClose } = useDisclosure()
+	const { push } = useRouter()
+	const { logoutUser } = UseAuth()
+	function handleLogout() {
+		logoutUser()
+		push('/login')
+	}
 
 	return (
 		<DefaultBackground>
@@ -14,8 +21,10 @@ export default function Account() {
 			</div>
 			<div className="w-3/3 lg:w-1/2 flex items-center justify-start m-8 p-5 bg-purpleHeader rounded">
 				<HiOutlineUserCircle className='h-14 w-14 mr-2' />
-				<span className="text-2xl font-semibold">Davi Souza</span>
-				<HiPencil className="ml-5 text-xl" />
+				<span className="text-2xl font-semibold mr-10">Davi Souza</span>
+				<button onClick={handleLogout} type="submit" className="flex-none rounded-md bg-red-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-500">
+					Logout
+				</button>
 			</div>
 			<div className="w-3/3 lg:w-1/2 flex items-center justify-center m-10 p-5 bg-purpleHeader rounded">
 				<div className="w-1/2 flex flex-col">
@@ -27,28 +36,7 @@ export default function Account() {
 					<span className="text-2xl font-semibold text-green-300">R$ 52,00</span>
 				</div>
 			</div>
-			<div className="w-3/3 lg:w-1/2 flex items-center justify-center m-10 p-5 bg-purpleHeader rounded">
-				<Button onClick={onOpen} className="p-5 text-xl hover:bg-[#2f2f70]">Add Transaction</Button>
-			</div>
-			<div className="p-1rounded bg-[#232358]">
-				<Modal isOpen={isOpen} onClose={onClose}>
-					<ModalOverlay />
-					<ModalContent>
-						<ModalHeader>Modal Title</ModalHeader>
-						<ModalCloseButton />
-						<ModalBody>
-							Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloribus impedit
-						</ModalBody>
 
-						<ModalFooter>
-							<Button colorScheme='blue' mr={3} onClick={onClose}>
-								Close
-							</Button>
-							<Button variant='ghost'>Secondary Action</Button>
-						</ModalFooter>
-					</ModalContent>
-				</Modal>
-			</div>
 			<div className="w-3/3 lg:w-1/2 flex flex-col m-10 p-5 bg-purpleHeader rounded">
 				<span className="text-xl font-semibold">Fixed Expenses</span>
 				<TableContainer>
