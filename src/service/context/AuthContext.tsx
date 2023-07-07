@@ -3,7 +3,6 @@ import { setCookie, getCookie } from 'cookies-next'
 import { useEffect, useState } from 'react'
 import { createContext } from 'react'
 import decode from 'jwt-decode'
-import Router from 'next/router'
 
 export interface User {
 	name: string

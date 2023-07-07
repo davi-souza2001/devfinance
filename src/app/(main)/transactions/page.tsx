@@ -11,6 +11,15 @@ export default function Transactions() {
 			<div className="h-24 w-full p-5 mt-5 flex flex-col items-start justify-center">
 				<span className="text-xl font-semibold">Your Transactions, Davi Souza! 📆</span>
 				<span className="font-light text-slate-400">Here you can manage your monthly transactions.</span>
+				<div className="mt-6 flex max-w-md gap-x-4">
+					<label htmlFor="email-address" className="sr-only">
+						Email address
+					</label>
+					<input type="text" required className="min-w-0 flex-auto rounded-md border-none outline-none bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6" placeholder="Enter your transaction" />
+					<button type="submit" className="flex-none rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+						Search
+					</button>
+				</div>
 			</div>
 			<div className="h-24 w-full lg:w-1/2 p-5 flex items-center justify-between">
 				<div className="flex items-center justify-center p-3 rounded bg-[#232358]">
@@ -25,7 +34,7 @@ export default function Transactions() {
 						<ModalContent>
 							<ModalHeader>Transaction</ModalHeader>
 							<ModalBody>
-								<ModalCloseButton className="bg-red-400 hover:bg-red-300" />
+								<ModalCloseButton className="bg-red-400 text-white hover:bg-red-300" />
 								<form className="flex flex-col items-start justify-center">
 									<label htmlFor="name" className="font-semibold text-lg mb-2">Name</label>
 									<input type="text" className="h-7 bg-slate-200 mb-2 border-none outline-none rounded-sm mb-5" />
@@ -37,7 +46,7 @@ export default function Transactions() {
 										<option value="no">No</option>
 									</select>
 									<div className="w-full flex items-end justify-end">
-										<button className="p-2 font-semibold rounded-md transition-all bg-green-400 hover:bg-green-300">Submit</button>
+										<button className="p-2 font-semibold rounded-md transition-all text-white bg-indigo-400 hover:bg-indigo-300">Submit</button>
 									</div>
 								</form>
 							</ModalBody>
