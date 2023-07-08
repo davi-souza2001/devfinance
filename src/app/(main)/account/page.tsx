@@ -36,34 +36,6 @@ export default function Account() {
 					<span className="text-2xl font-semibold text-green-300">R$ 52,00</span>
 				</div>
 			</div>
-
-			<div className="w-3/3 lg:w-1/2 flex flex-col m-10 p-5 bg-purpleHeader rounded">
-				<span className="text-xl font-semibold">Fixed Expenses</span>
-				<TableContainer>
-					<Table variant='simple' size={'lg'}>
-						<Thead>
-							<Tr>
-								<Th>Name</Th>
-								<Th isNumeric>Value</Th>
-							</Tr>
-						</Thead>
-						<Tbody>
-							<Tr>
-								<Td>inches</Td>
-								<Td isNumeric>25.4</Td>
-							</Tr>
-							<Tr>
-								<Td>feet</Td>
-								<Td isNumeric>30.48</Td>
-							</Tr>
-							<Tr>
-								<Td>yards</Td>
-								<Td isNumeric>0.91444</Td>
-							</Tr>
-						</Tbody>
-					</Table>
-				</TableContainer>
-			</div>
 		</DefaultBackground>
 	)
 }
