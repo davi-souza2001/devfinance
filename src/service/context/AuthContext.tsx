@@ -8,7 +8,7 @@ export interface User {
 	name: string
 	email: string
 	password: string
-	token: string
+	token?: string
 	patrimony?: number
 	salary?: number
 }

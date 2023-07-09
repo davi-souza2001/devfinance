@@ -1,7 +1,6 @@
 'use client'
 import { DefaultBackground } from '@/components/DefaultBackground'
 import UseAuth from '@/service/hooks/useAuth'
-import { TableContainer, Table, Thead, Tr, Th, Tbody, Td } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
 import { HiOutlineUserCircle } from 'react-icons/hi'
 
