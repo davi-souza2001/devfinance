@@ -18,16 +18,16 @@ const createUserFormSchema = z.object({
 		.min(6, 'A senha precisa ter no mínimo 6 caracteres!')
 })
 
-type CreateUserFOrmData = z.infer<typeof createUserFormSchema>
+type CreateUserFormData = z.infer<typeof createUserFormSchema>
 
 export default function Login() {
 	const { push } = useRouter()
 	const { loginUser } = UseAuth()
-	const { register, handleSubmit, formState: { errors } } = useForm<CreateUserFOrmData>({
+	const { register, handleSubmit, formState: { errors } } = useForm<CreateUserFormData>({
 		resolver: zodResolver(createUserFormSchema)
 	})
 
-	async function handleLoginUser(data: any) {
+	async function handleLoginUser(data: CreateUserFormData) {
 		await loginUser(data)
 		push('/')
 	}

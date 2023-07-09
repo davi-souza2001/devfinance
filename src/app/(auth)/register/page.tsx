@@ -34,7 +34,7 @@ export default function Register() {
 		resolver: zodResolver(createUserFormSchema)
 	})
 
-	async function handleRegisterUser(data: any) {
+	async function handleRegisterUser(data: CreateUserFOrmData) {
 		await registerUser(data)
 		push('/')
 	}

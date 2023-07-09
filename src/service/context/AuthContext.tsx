@@ -8,6 +8,7 @@ export interface User {
 	name: string
 	email: string
 	password: string
+	token: string
 	patrimony?: number
 	salary?: number
 }
@@ -16,11 +17,16 @@ interface UserResponse {
 	payload: User
 }
 
+interface UserLogin {
+	email: string
+	password: string
+}
+
 interface AuthContextProps {
 	user: User
 	loading: boolean
 	registerUser: (data: User) => Promise<void>
-	loginUser: (data: User) => Promise<void>
+	loginUser: (data: UserLogin) => Promise<void>
 	logoutUser: () => void
 }
 
@@ -28,7 +34,8 @@ const AuthContext = createContext<AuthContextProps>({
 	user: {
 		name: '',
 		email: '',
-		password: ''
+		password: '',
+		token: ''
 	},
 	loading: false,
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -39,7 +46,6 @@ const AuthContext = createContext<AuthContextProps>({
 	logoutUser: () => { }
 })
 
-const route = 'http://localhost:3333'
 const tokenBase = 'tokenAuthFinance'
 
 interface AuthProps {
@@ -52,12 +58,13 @@ export function AuthProvider(props: AuthProps) {
 	const [user, setUser] = useState<User>({
 		name: '',
 		email: '',
-		password: ''
+		password: '',
+		token: ''
 	})
 
 	async function registerUser(data: User) {
 		setLoading(true)
-		const response = await fetch(`${route}/user/create`, {
+		const response = await fetch(`${process.env.NEXT_PUBLIC_ROUTE}/user/create`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -75,9 +82,9 @@ export function AuthProvider(props: AuthProps) {
 		setLoading(false)
 	}
 
-	async function loginUser(data: User) {
+	async function loginUser(data: UserLogin) {
 		setLoading(true)
-		const response = await fetch(`${route}/user/login`, {
+		const response = await fetch(`${process.env.NEXT_PUBLIC_ROUTE}/user/login`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -105,7 +112,8 @@ export function AuthProvider(props: AuthProps) {
 		setLoading(true)
 		if (token) {
 			const user = decode(token) as UserResponse
-			setUser(user.payload)
+			const userComplete = { ...user.payload, token }
+			setUser(userComplete)
 		}
 		setLoading(false)
 	}, [token])
