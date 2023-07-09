@@ -4,6 +4,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 
 import { Header } from '@/components/Header'
 import { AuthProvider } from '../../service/context/AuthContext'
+import { TransactionProvider } from '../../service/context/TransactionContext'
 
 import '../globals.css'
 
@@ -16,14 +17,16 @@ export default function RootLayout(props: RootLayoutProps) {
 		<html>
 			<body className='font-poppins' suppressHydrationWarning={true} >
 				<AuthProvider>
-					<CacheProvider>
-						<ChakraProvider>
-							<div className='h-screen w-screen lg:flex'>
-								<Header />
-								{props.children}
-							</div>
-						</ChakraProvider>
-					</CacheProvider>
+					<TransactionProvider>
+						<CacheProvider>
+							<ChakraProvider>
+								<div className='h-screen w-screen lg:flex'>
+									<Header />
+									{props.children}
+								</div>
+							</ChakraProvider>
+						</CacheProvider>
+					</TransactionProvider>
 				</AuthProvider>
 			</body>
 		</html>

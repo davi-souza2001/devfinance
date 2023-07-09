@@ -6,6 +6,7 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import UseAuth from '@/service/hooks/useAuth'
+import UseTransaction from '@/service/hooks/useTransaction'
 
 const createTransactionFormSchema = z.object({
 	name: z.string()
@@ -27,21 +28,13 @@ type CreateTransactionFormData = z.infer<typeof createTransactionFormSchema>
 export default function Transactions() {
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const { user } = UseAuth()
+	const { sendTransaction } = UseTransaction()
 	const { register, handleSubmit, formState: { errors } } = useForm<CreateTransactionFormData>({
 		resolver: zodResolver(createTransactionFormSchema)
 	})
 
 	async function handleSendTransaction(data: CreateTransactionFormData) {
-		console.log(user)
-		const transaction = { ...data, emailUser: user.email }
-		await fetch(`${process.env.NEXT_PUBLIC_ROUTE}/expenses/create`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				'authorization': `Bearer ${user.token}`
-			},
-			body: JSON.stringify(transaction)
-		})
+		await sendTransaction(data, user.email, user.token ?? '')
 		onClose()
 	}
 
@@ -106,7 +99,7 @@ export default function Transactions() {
 				</div>
 			</div>
 			<div className="w-3/3 lg:w-1/2 flex flex-col m-10 p-5 bg-purpleHeader rounded">
-				<span className="text-xl font-semibold">Fixed Expenses</span>
+				<span className="text-xl font-semibold">Expenses</span>
 				<TableContainer>
 					<Table variant='simple' size={'lg'}>
 						<Thead>
@@ -114,6 +107,7 @@ export default function Transactions() {
 								<Th>Name</Th>
 								<Th isNumeric>Value</Th>
 								<Th>Recurrent</Th>
+								<Th>Expense</Th>
 							</Tr>
 						</Thead>
 						<Tbody>
@@ -121,15 +115,18 @@ export default function Transactions() {
 								<Td>inches</Td>
 								<Td isNumeric>25.4</Td>
 								<Td>Yes</Td>
+								<Td>Yes</Td>
 							</Tr>
 							<Tr>
 								<Td>feet</Td>
 								<Td isNumeric>30.48</Td>
 								<Td>Yes</Td>
+								<Td>Yes</Td>
 							</Tr>
 							<Tr>
 								<Td>yards</Td>
 								<Td isNumeric>0.91444</Td>
+								<Td>Yes</Td>
 								<Td>Yes</Td>
 							</Tr>
 						</Tbody>

@@ -48,11 +48,7 @@ const AuthContext = createContext<AuthContextProps>({
 
 const tokenBase = 'tokenAuthFinance'
 
-interface AuthProps {
-	children: React.ReactNode
-}
-
-export function AuthProvider(props: AuthProps) {
+export function AuthProvider(props: { children: React.ReactNode }) {
 	const token = getCookie(tokenBase)?.toString()
 	const [loading, setLoading] = useState<boolean>(false)
 	const [user, setUser] = useState<User>({
