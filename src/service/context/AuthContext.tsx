@@ -55,7 +55,8 @@ export function AuthProvider(props: { children: React.ReactNode }) {
 		name: '',
 		email: '',
 		password: '',
-		token: ''
+		token: '',
+		patrimony: 0,
 	})
 
 	async function registerUser(data: User) {
