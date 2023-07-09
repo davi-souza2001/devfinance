@@ -50,4 +50,7 @@ Ele deve consultar para verificar quanto eu terei se comprar x coisa
 
 <!-- 
 - [] Adicionar novas rotas para calcular as funções
+
+ Optional:
+ - [] Adicionar componente de tabela unificado
 -->

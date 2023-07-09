@@ -28,13 +28,16 @@ type CreateTransactionFormData = z.infer<typeof createTransactionFormSchema>
 export default function Transactions() {
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const { user } = UseAuth()
-	const { sendTransaction } = UseTransaction()
+	const { sendTransaction, transactions, getTransactions } = UseTransaction()
 	const { register, handleSubmit, formState: { errors } } = useForm<CreateTransactionFormData>({
 		resolver: zodResolver(createTransactionFormSchema)
 	})
 
 	async function handleSendTransaction(data: CreateTransactionFormData) {
-		await sendTransaction(data, user.email, user.token ?? '')
+		const send = await sendTransaction(data, user.email)
+		const get = await getTransactions(user.email)
+
+		Promise.all([send, get])
 		onClose()
 	}
 
@@ -51,11 +54,6 @@ export default function Transactions() {
 				</div>
 			</div>
 			<div className="h-24 w-full lg:w-1/2 p-5 flex items-center justify-between">
-				<div className="flex items-center justify-center p-3 rounded bg-[#232358]">
-					<HiArrowNarrowLeft className="cursor-pointer hover:bg-[#2f2f70]" />
-					<span className="mx-2">Fev / 2023</span>
-					<HiArrowNarrowRight className="cursor-pointer  hover:bg-[#2f2f70]" />
-				</div>
 				<div className="p-1 rounded bg-[#232358]">
 					<Button onClick={onOpen} className="hover:bg-[#2f2f70]">Add Transaction</Button>
 					<Modal isOpen={isOpen} onClose={onClose}>
@@ -111,24 +109,16 @@ export default function Transactions() {
 							</Tr>
 						</Thead>
 						<Tbody>
-							<Tr>
-								<Td>inches</Td>
-								<Td isNumeric>25.4</Td>
-								<Td>Yes</Td>
-								<Td>Yes</Td>
-							</Tr>
-							<Tr>
-								<Td>feet</Td>
-								<Td isNumeric>30.48</Td>
-								<Td>Yes</Td>
-								<Td>Yes</Td>
-							</Tr>
-							<Tr>
-								<Td>yards</Td>
-								<Td isNumeric>0.91444</Td>
-								<Td>Yes</Td>
-								<Td>Yes</Td>
-							</Tr>
+							{transactions.map(t => {
+								return (
+									<Tr key={t.name}>
+										<Td>{t.name}</Td>
+										<Td isNumeric>{t.value}</Td>
+										<Td>{t.recurrent === true ? 'Yes' : 'No'}</Td>
+										<Td>{t.expense === true ? 'Yes' : 'No'}</Td>
+									</Tr>
+								)
+							})}
 						</Tbody>
 					</Table>
 				</TableContainer>
