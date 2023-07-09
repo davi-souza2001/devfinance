@@ -1,4 +1,5 @@
 import UseAuth from '@/service/hooks/useAuth'
+
 import { Loading } from './Loading'
 
 interface defaultBackgroundProps {

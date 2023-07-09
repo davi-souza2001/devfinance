@@ -1,7 +1,8 @@
 import { createContext, useEffect, useState } from 'react'
+
 import UseAuth from '../hooks/useAuth'
 
-interface Transaction {
+export interface Transaction {
 	name: string
 	value: number
 	recurrent: boolean

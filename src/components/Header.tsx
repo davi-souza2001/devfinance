@@ -1,14 +1,14 @@
 'use client'
+import Link from 'next/link'
 import Image from 'next/image'
+import { useState } from 'react'
+import { TbMoneybag } from 'react-icons/tb'
+import { HiOutlineWallet } from 'react-icons/hi2'
 import { Menu, MenuButton, MenuList } from '@chakra-ui/react'
 import { HiMenu, HiOutlineRefresh, HiOutlineUserCircle, HiViewGrid } from 'react-icons/hi'
-import { HiOutlineWallet } from 'react-icons/hi2'
-import { TbMoneybag } from 'react-icons/tb'
 
 import Logo from '../../public/Logo.svg'
-import Link from 'next/link'
 import UseAuth from '@/service/hooks/useAuth'
-import { useState } from 'react'
 
 interface Dashboard {
 	option: 'Dashboard' | 'My Wallet' | 'My Transactions' | 'Account' | ''

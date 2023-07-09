@@ -1,12 +1,12 @@
 'use client'
-import Link from 'next/link'
 import { z } from 'zod'
+import Link from 'next/link'
 import { useForm } from 'react-hook-form'
+import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 import { DefaultBackground } from '@/components/DefaultBackground'
 import UseAuth from '@/service/hooks/useAuth'
-import { useRouter } from 'next/navigation'
 
 const createUserFormSchema = z.object({
 	email: z.string()

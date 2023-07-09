@@ -1,13 +1,29 @@
 'use client'
-import { DefaultBackground } from '@/components/DefaultBackground'
-import { Button, Modal, ModalBody, ModalCloseButton, ModalContent, ModalHeader, ModalOverlay, Table, TableContainer, Tbody, Td, Th, Thead, Tr, useDisclosure } from '@chakra-ui/react'
-import { HiArrowNarrowLeft, HiArrowNarrowRight } from 'react-icons/hi'
+import { useState } from 'react'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
+import {
+	Button,
+	Modal,
+	ModalBody,
+	ModalCloseButton,
+	ModalContent,
+	ModalHeader,
+	ModalOverlay,
+	Table,
+	TableContainer,
+	Tbody,
+	Td,
+	Th,
+	Thead,
+	Tr,
+	useDisclosure
+} from '@chakra-ui/react'
 import { zodResolver } from '@hookform/resolvers/zod'
+
+import { DefaultBackground } from '@/components/DefaultBackground'
 import UseAuth from '@/service/hooks/useAuth'
 import UseTransaction from '@/service/hooks/useTransaction'
-import { useState } from 'react'
 
 const createTransactionFormSchema = z.object({
 	name: z.string()

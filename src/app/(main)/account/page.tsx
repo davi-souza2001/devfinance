@@ -1,8 +1,9 @@
 'use client'
-import { DefaultBackground } from '@/components/DefaultBackground'
-import UseAuth from '@/service/hooks/useAuth'
 import { useRouter } from 'next/navigation'
 import { HiOutlineUserCircle } from 'react-icons/hi'
+
+import UseAuth from '@/service/hooks/useAuth'
+import { DefaultBackground } from '@/components/DefaultBackground'
 
 export default function Account() {
 	const { push } = useRouter()

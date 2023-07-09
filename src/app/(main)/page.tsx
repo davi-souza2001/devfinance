@@ -1,7 +1,8 @@
 'use client'
-import { DefaultBackground } from '@/components/DefaultBackground'
-import { Progress, Stat, StatArrow, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
 import { HiArrowCircleDown, HiArrowCircleUp } from 'react-icons/hi'
+import { Progress, Stat, StatArrow, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
+
+import { DefaultBackground } from '@/components/DefaultBackground'
 
 export default function Home() {
 	return (
