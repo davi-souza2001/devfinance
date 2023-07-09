@@ -11,6 +11,7 @@ interface Transaction {
 interface TransactionProps {
 	transactions: Transaction[]
 	getTransactions: (email: string) => Promise<void>
+	getSearchTransactions: (email: string, search: string) => Promise<void>
 	sendTransaction: (data: Transaction, email: string) => Promise<void>
 }
 
@@ -18,6 +19,8 @@ const TransactionContext = createContext<TransactionProps>({
 	transactions: [],
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	getTransactions: async () => { },
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	getSearchTransactions: async () => { },
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	sendTransaction: async () => { },
 })
@@ -47,8 +50,23 @@ export function TransactionProvider(props: { children: React.ReactNode }) {
 			},
 		})
 
-		const transactionsReceiveds = await response.json()
-		setTransactions(transactionsReceiveds)
+		const transactionsReceivedes = await response.json()
+		setTransactions(transactionsReceivedes)
+	}
+
+	async function getSearchTransactions(email: string, search: string) {
+		const response = await fetch(`
+		${process.env.NEXT_PUBLIC_ROUTE}/expenses/search/${email}/${search}
+		`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'authorization': `Bearer ${user.token}`
+			},
+		})
+
+		const transactionsReceivedes = await response.json()
+		setTransactions(transactionsReceivedes)
 	}
 
 	useEffect(() => {
@@ -61,6 +79,7 @@ export function TransactionProvider(props: { children: React.ReactNode }) {
 		<TransactionContext.Provider value={{
 			transactions,
 			getTransactions,
+			getSearchTransactions,
 			sendTransaction
 		}}>
 			{props.children}

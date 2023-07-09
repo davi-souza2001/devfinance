@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import UseAuth from '@/service/hooks/useAuth'
 import UseTransaction from '@/service/hooks/useTransaction'
+import { useState } from 'react'
 
 const createTransactionFormSchema = z.object({
 	name: z.string()
@@ -28,7 +29,8 @@ type CreateTransactionFormData = z.infer<typeof createTransactionFormSchema>
 export default function Transactions() {
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const { user } = UseAuth()
-	const { sendTransaction, transactions, getTransactions } = UseTransaction()
+	const [search, setSearch] = useState('')
+	const { sendTransaction, transactions, getTransactions, getSearchTransactions } = UseTransaction()
 	const { register, handleSubmit, formState: { errors } } = useForm<CreateTransactionFormData>({
 		resolver: zodResolver(createTransactionFormSchema)
 	})
@@ -41,14 +43,22 @@ export default function Transactions() {
 		onClose()
 	}
 
+	async function searchTransactions() {
+		if (search === '') {
+			await getTransactions(user.email)
+		} else {
+			await getSearchTransactions(user.email, search)
+		}
+	}
+
 	return (
 		<DefaultBackground>
 			<div className="h-24 w-full p-5 mt-5 flex flex-col items-start justify-center">
 				<span className="text-xl font-semibold">Your Transactions, Davi Souza! 📆</span>
 				<span className="font-light text-slate-400">Here you can manage your monthly transactions.</span>
 				<div className="mt-6 flex max-w-md gap-x-4">
-					<input type="text" required className="min-w-0 flex-auto rounded-md border-none outline-none bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6" placeholder="Enter your transaction" />
-					<button type="submit" className="flex-none rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+					<input type="text" required onChange={(e) => setSearch(e.target.value)} className="min-w-0 flex-auto rounded-md border-none outline-none bg-white/5 px-3.5 py-2 text-white shadow-sm ring-1 ring-inset ring-white/10 focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6" placeholder="Enter your transaction" />
+					<button onClick={searchTransactions} type="submit" className="flex-none rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
 						Search
 					</button>
 				</div>
@@ -98,31 +108,38 @@ export default function Transactions() {
 			</div>
 			<div className="w-3/3 lg:w-1/2 flex flex-col m-10 p-5 bg-purpleHeader rounded">
 				<span className="text-xl font-semibold">Expenses</span>
-				<TableContainer>
-					<Table variant='simple' size={'lg'}>
-						<Thead>
-							<Tr>
-								<Th>Name</Th>
-								<Th isNumeric>Value</Th>
-								<Th>Recurrent</Th>
-								<Th>Expense</Th>
-							</Tr>
-						</Thead>
-						<Tbody>
-							{transactions.map(t => {
-								return (
-									<Tr key={t.name}>
-										<Td>{t.name}</Td>
-										<Td isNumeric>{t.value}</Td>
-										<Td>{t.recurrent === true ? 'Yes' : 'No'}</Td>
-										<Td>{t.expense === true ? 'Yes' : 'No'}</Td>
+				{transactions.length === 0 ? (
+					<span className="font-light text-slate-400 my-3">You don't have any expenses yet.</span>
+				) : (
+					<>
+						<TableContainer>
+							<Table variant='simple' size={'lg'}>
+								<Thead>
+									<Tr>
+										<Th>Name</Th>
+										<Th isNumeric>Value</Th>
+										<Th>Recurrent</Th>
+										<Th>Expense</Th>
 									</Tr>
-								)
-							})}
-						</Tbody>
-					</Table>
-				</TableContainer>
-			</div>
-		</DefaultBackground>
+								</Thead >
+								<Tbody>
+									{transactions.map(t => {
+										return (
+											<Tr key={t.name}>
+												<Td>{t.name}</Td>
+												<Td isNumeric>{t.value}</Td>
+												<Td>{t.recurrent === true ? 'Yes' : 'No'}</Td>
+												<Td>{t.expense === true ? 'Yes' : 'No'}</Td>
+											</Tr>
+										)
+									})}
+								</Tbody>
+							</Table >
+						</TableContainer >
+					</>
+				)
+				}
+			</div >
+		</DefaultBackground >
 	)
 }
