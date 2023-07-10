@@ -135,7 +135,7 @@ export default function Transactions() {
 				</div>
 			</div>
 			<div className="w-3/3 lg:w-1/2 flex flex-col m-10 p-5 bg-purpleHeader rounded">
-				<span className="text-xl font-semibold">Expenses</span>
+				<span className="text-xl font-semibold">My Transactions</span>
 				{transactions.length === 0 ? (
 					<span className="font-light text-slate-400 my-3">You don't have any expenses yet.</span>
 				) : (

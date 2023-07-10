@@ -26,16 +26,6 @@ export default function Account() {
 					Logout
 				</button>
 			</div>
-			<div className="w-3/3 lg:w-1/2 flex items-center justify-center m-10 p-5 bg-purpleHeader rounded">
-				<div className="w-1/2 flex flex-col">
-					<span className="flex items-center text-xl mb-3 font-semibold">Patrimony</span>
-					<span className="text-2xl font-semibold">R$ 52,00</span>
-				</div>
-				<div className="w-1/2 flex flex-col">
-					<span className="flex items-center text-xl mb-3 font-semibold text-green-300">Next Month</span>
-					<span className="text-2xl font-semibold text-green-300">R$ 52,00</span>
-				</div>
-			</div>
 		</DefaultBackground>
 	)
 }

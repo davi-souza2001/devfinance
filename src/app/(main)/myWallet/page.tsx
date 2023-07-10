@@ -25,7 +25,6 @@ export default function MyWallet() {
 		const filterRecurrentExpenses = filterRecurrent.filter((transaction) => transaction.expense === true)
 		const expenses = filterRecurrentExpenses.reduce((acc, curr) => acc + curr.value, 0)
 		setExpenses(expenses)
-
 	}, [transactions])
 
 	return (
@@ -43,12 +42,12 @@ export default function MyWallet() {
 			</div>
 			<div className="w-3/3 lg:w-1/2 flex flex-col m-10 p-5 bg-purpleHeader rounded">
 				<span className="flex items-center text-xl mb-3 font-semibold">My Expenses<HiMinusCircle className="ml-5 text-2xl text-red-500" /> </span>
-				<span className="text-2xl font-semibold">R$ {expenses === 0 ? '00' : expenses},00</span>
+				<span className="text-2xl font-semibold">R$ {expenses},00</span>
 			</div>
 			<div className="w-3/3 lg:w-1/2 flex flex-col m-10 p-5 bg-purpleHeader rounded">
 				<span className="text-xl font-semibold">My Recurrent Expenses</span>
-				{transactions.length === 0 ? (
-					<span className="font-light text-slate-400 my-3">You don't have any expenses yet.</span>
+				{recurrents.length === 0 ? (
+					<span className="font-light text-slate-400 my-3">You don't have any current expenses yet.</span>
 				) : (
 					<TableContainer>
 						<Table variant='simple' size={'md'}>

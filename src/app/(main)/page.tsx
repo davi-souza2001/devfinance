@@ -1,16 +1,18 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { HiArrowCircleDown, HiArrowCircleUp } from 'react-icons/hi'
+import { HiArrowCircleDown, HiArrowCircleUp, HiTrash } from 'react-icons/hi'
 import { Progress, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
 
 import { DefaultBackground } from '@/components/DefaultBackground'
 import UseAuth from '@/service/hooks/useAuth'
 import UseTransaction from '@/service/hooks/useTransaction'
+import { Transaction } from '@/service/context/TransactionContext'
 
 export default function Home() {
 	const { patrimony, getPatrimony, user } = UseAuth()
-	const { transactions } = UseTransaction()
+	const { transactions, deleteTransaction, getTransactions } = UseTransaction()
 	const [totalExpense, setTotalExpense] = useState<number>(0)
+	const [transactionsExpenses, setTransactionsExpenses] = useState<Transaction[]>([])
 
 	function filterValueDate(month: number) {
 		const transactionsInMonth = transactions.filter((transaction) => {
@@ -25,13 +27,20 @@ export default function Home() {
 
 		return totalExpense
 	}
+
+	async function handleDeleteTransaction(id: string) {
+		const deleteT = await deleteTransaction(id)
+		const get = await getTransactions(user.email)
+
+		Promise.all([deleteT, get])
+	}
+
 	useEffect(() => {
 		const filterExpenses = transactions.filter((transaction) => transaction.expense === true)
+		setTransactionsExpenses(filterExpenses)
 		const filterTotalExpense = filterExpenses.reduce((acc, curr) => acc + curr.value, 0)
 
 		setTotalExpense(filterTotalExpense)
-
-		filterValueDate(6)
 
 	}, [transactions])
 
@@ -135,35 +144,45 @@ export default function Home() {
 					<Progress colorScheme='blue' height='22px' value={filterValueDate(12) / 100} className="mb-3 rounded outline-none border-none" />
 				</div>
 				<div className="w-full mt-10 p-5 bg-purpleHeader rounded">
-					<span className="text-xl font-semibold">Transactions</span>
-					<TableContainer>
-						<Table variant='simple'>
-							<Thead>
-								<Tr>
-									<Th>To convert</Th>
-									<Th>into</Th>
-									<Th isNumeric>multiply by</Th>
-								</Tr>
-							</Thead>
-							<Tbody>
-								<Tr>
-									<Td>inches</Td>
-									<Td>millimetres (mm)</Td>
-									<Td isNumeric>25.4</Td>
-								</Tr>
-								<Tr>
-									<Td>feet</Td>
-									<Td>centimetres (cm)</Td>
-									<Td isNumeric>30.48</Td>
-								</Tr>
-								<Tr>
-									<Td>yards</Td>
-									<Td>metres (m)</Td>
-									<Td isNumeric>0.91444</Td>
-								</Tr>
-							</Tbody>
-						</Table>
-					</TableContainer>
+					<span className="text-xl font-semibold">My Expenses</span>
+					{transactionsExpenses.length === 0 ? (
+						<span className="font-light text-slate-400 my-3">You don't have any expenses yet.</span>
+					) : (
+						<>
+							<TableContainer>
+								<Table variant='simple' size={'lg'} >
+									<Thead>
+										<Tr>
+											<Th>Name</Th>
+											<Th isNumeric>Value</Th>
+											<Th>Recurrent</Th>
+											<Th>Expense</Th>
+											<Th>Action</Th>
+										</Tr>
+									</Thead >
+									<Tbody >
+										{transactionsExpenses.map(t => {
+											return (
+												<Tr key={t.name} >
+													<Td >{t.name}</Td>
+													<Td isNumeric>{t.value}</Td>
+													<Td>{t.recurrent === true ? 'Yes' : 'No'}</Td>
+													<Td>{t.expense === true ? 'Yes' : 'No'}</Td>
+													<Td>
+														<HiTrash
+															onClick={() => handleDeleteTransaction(t.id ?? '')}
+															className='text-2xl cursor-pointer transition-all hover:text-red-400'
+														/>
+													</Td>
+												</Tr>
+											)
+										})}
+									</Tbody>
+								</Table >
+							</TableContainer >
+						</>
+					)
+					}
 				</div>
 			</div>
 		</DefaultBackground>
