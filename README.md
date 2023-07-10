@@ -49,6 +49,7 @@ Ele deve consultar para verificar quanto eu terei se comprar x coisa
 -->
 
 <!-- 
+- [] Criar hash para senha de usuário
 - [] Adicionar novas rotas para calcular as funções
 
  Optional:

@@ -42,7 +42,7 @@ export default function MyWallet() {
 					<span className="font-light text-slate-400 my-3">You don't have any expenses yet.</span>
 				) : (
 					<TableContainer>
-						<Table variant='simple'>
+						<Table variant='simple' size={'md'}>
 							<Thead>
 								<Tr>
 									<Th>Name</Th>

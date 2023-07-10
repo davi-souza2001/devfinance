@@ -24,6 +24,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { DefaultBackground } from '@/components/DefaultBackground'
 import UseAuth from '@/service/hooks/useAuth'
 import UseTransaction from '@/service/hooks/useTransaction'
+import { HiTrash } from 'react-icons/hi'
 
 const createTransactionFormSchema = z.object({
 	name: z.string()
@@ -46,7 +47,7 @@ export default function Transactions() {
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const { user, getPatrimony } = UseAuth()
 	const [search, setSearch] = useState('')
-	const { sendTransaction, transactions, getTransactions, getSearchTransactions, updatePatrimony } = UseTransaction()
+	const { sendTransaction, transactions, getTransactions, getSearchTransactions, updatePatrimony, deleteTransaction } = UseTransaction()
 	const { register, handleSubmit, formState: { errors } } = useForm<CreateTransactionFormData>({
 		resolver: zodResolver(createTransactionFormSchema)
 	})
@@ -60,6 +61,13 @@ export default function Transactions() {
 		Promise.all([send, get, update, getP])
 
 		onClose()
+	}
+
+	async function handleDeleteTransaction(id: string) {
+		const deleteT = await deleteTransaction(id)
+		const get = await getTransactions(user.email)
+
+		Promise.all([deleteT, get])
 	}
 
 	async function searchTransactions() {
@@ -132,23 +140,30 @@ export default function Transactions() {
 				) : (
 					<>
 						<TableContainer>
-							<Table variant='simple' size={'lg'}>
+							<Table variant='simple' size={'lg'} >
 								<Thead>
 									<Tr>
 										<Th>Name</Th>
 										<Th isNumeric>Value</Th>
 										<Th>Recurrent</Th>
 										<Th>Expense</Th>
+										<Th>Action</Th>
 									</Tr>
 								</Thead >
-								<Tbody>
+								<Tbody >
 									{transactions.map(t => {
 										return (
-											<Tr key={t.name}>
-												<Td>{t.name}</Td>
+											<Tr key={t.name} >
+												<Td >{t.name}</Td>
 												<Td isNumeric>{t.value}</Td>
 												<Td>{t.recurrent === true ? 'Yes' : 'No'}</Td>
 												<Td>{t.expense === true ? 'Yes' : 'No'}</Td>
+												<Td>
+													<HiTrash
+														onClick={() => handleDeleteTransaction(t.id ?? '')}
+														className='text-2xl cursor-pointer transition-all hover:text-red-400'
+													/>
+												</Td>
 											</Tr>
 										)
 									})}

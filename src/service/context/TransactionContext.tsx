@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from 'react'
 import UseAuth from '../hooks/useAuth'
 
 export interface Transaction {
+	id?: string
 	name: string
 	value: number
 	recurrent: boolean
@@ -15,6 +16,7 @@ interface TransactionProps {
 	getSearchTransactions: (email: string, search: string) => Promise<void>
 	sendTransaction: (data: Transaction, email: string) => Promise<void>
 	updatePatrimony: (email: string, value: number, expense: boolean) => Promise<void>
+	deleteTransaction: (id: string) => Promise<void>
 }
 
 const TransactionContext = createContext<TransactionProps>({
@@ -26,7 +28,9 @@ const TransactionContext = createContext<TransactionProps>({
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	sendTransaction: async () => { },
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	updatePatrimony: async () => { }
+	updatePatrimony: async () => { },
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	deleteTransaction: async () => { }
 })
 
 export function TransactionProvider(props: { children: React.ReactNode }) {
@@ -73,6 +77,16 @@ export function TransactionProvider(props: { children: React.ReactNode }) {
 		setTransactions(transactionsReceivedes)
 	}
 
+	async function deleteTransaction(id: string) {
+		await fetch(`${process.env.NEXT_PUBLIC_ROUTE}/expenses/delete/${id}`, {
+			method: 'DELETE',
+			headers: {
+				'Content-Type': 'application/json',
+				'authorization': `Bearer ${user.token}`
+			},
+		})
+	}
+
 	async function updatePatrimony(email: string, value: number, expense: boolean) {
 		if (expense) {
 			const response = await getPatrimony(email)
@@ -114,6 +128,7 @@ export function TransactionProvider(props: { children: React.ReactNode }) {
 			getTransactions,
 			getSearchTransactions,
 			sendTransaction,
+			deleteTransaction,
 			updatePatrimony
 		}}>
 			{props.children}
