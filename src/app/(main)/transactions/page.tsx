@@ -44,9 +44,9 @@ type CreateTransactionFormData = z.infer<typeof createTransactionFormSchema>
 
 export default function Transactions() {
 	const { isOpen, onOpen, onClose } = useDisclosure()
-	const { user } = UseAuth()
+	const { user, getPatrimony } = UseAuth()
 	const [search, setSearch] = useState('')
-	const { sendTransaction, transactions, getTransactions, getSearchTransactions } = UseTransaction()
+	const { sendTransaction, transactions, getTransactions, getSearchTransactions, updatePatrimony } = UseTransaction()
 	const { register, handleSubmit, formState: { errors } } = useForm<CreateTransactionFormData>({
 		resolver: zodResolver(createTransactionFormSchema)
 	})
@@ -54,8 +54,11 @@ export default function Transactions() {
 	async function handleSendTransaction(data: CreateTransactionFormData) {
 		const send = await sendTransaction(data, user.email)
 		const get = await getTransactions(user.email)
+		const update = await updatePatrimony(user.email, data.value, data.expense)
+		const getP = await getPatrimony(user.email)
 
-		Promise.all([send, get])
+		Promise.all([send, get, update, getP])
+
 		onClose()
 	}
 

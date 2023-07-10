@@ -25,6 +25,7 @@ interface UserLogin {
 interface AuthContextProps {
 	user: User
 	loading: boolean
+	getPatrimony: (email: string) => Promise<number>
 	registerUser: (data: User) => Promise<void>
 	loginUser: (data: UserLogin) => Promise<void>
 	logoutUser: () => void
@@ -35,13 +36,15 @@ const AuthContext = createContext<AuthContextProps>({
 		name: '',
 		email: '',
 		password: '',
-		token: ''
+		token: '',
+		patrimony: 0
 	},
 	loading: false,
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	registerUser: async () => { },
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	loginUser: async () => { },
+	getPatrimony: async () => 0,
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	logoutUser: () => { }
 })
@@ -56,7 +59,7 @@ export function AuthProvider(props: { children: React.ReactNode }) {
 		email: '',
 		password: '',
 		token: '',
-		patrimony: 0,
+		patrimony: 0
 	})
 
 	async function registerUser(data: User) {
@@ -99,6 +102,23 @@ export function AuthProvider(props: { children: React.ReactNode }) {
 		setLoading(false)
 	}
 
+	async function getPatrimony(email: string) {
+		const response = await fetch(`
+		${process.env.NEXT_PUBLIC_ROUTE}/user/getPatrimony/${email}
+		`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'authorization': `Bearer ${user.token}`
+			}
+		})
+
+		const resolve = await response.json()
+		setUser({ ...user, patrimony: resolve.patrimony })
+
+		return resolve.patrimony
+	}
+
 	async function logoutUser() {
 		setLoading(true)
 		deleteCookie(tokenBase)
@@ -120,6 +140,7 @@ export function AuthProvider(props: { children: React.ReactNode }) {
 			user,
 			loading,
 			registerUser,
+			getPatrimony,
 			loginUser,
 			logoutUser
 		}}>

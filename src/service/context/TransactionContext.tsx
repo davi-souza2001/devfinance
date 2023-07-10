@@ -14,6 +14,7 @@ interface TransactionProps {
 	getTransactions: (email: string) => Promise<void>
 	getSearchTransactions: (email: string, search: string) => Promise<void>
 	sendTransaction: (data: Transaction, email: string) => Promise<void>
+	updatePatrimony: (email: string, value: number, expense: boolean) => Promise<void>
 }
 
 const TransactionContext = createContext<TransactionProps>({
@@ -24,11 +25,13 @@ const TransactionContext = createContext<TransactionProps>({
 	getSearchTransactions: async () => { },
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	sendTransaction: async () => { },
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	updatePatrimony: async () => { }
 })
 
 export function TransactionProvider(props: { children: React.ReactNode }) {
 	const [transactions, setTransactions] = useState<Transaction[]>([])
-	const { user } = UseAuth()
+	const { user, getPatrimony } = UseAuth()
 
 	async function sendTransaction(data: Transaction, email: string) {
 		const transaction = { ...data, emailUser: email }
@@ -70,6 +73,35 @@ export function TransactionProvider(props: { children: React.ReactNode }) {
 		setTransactions(transactionsReceivedes)
 	}
 
+	async function updatePatrimony(email: string, value: number, expense: boolean) {
+		if (expense) {
+			const response = await getPatrimony(email)
+			const patrimony = response - value
+			const data = { email, patrimony }
+			await fetch(`${process.env.NEXT_PUBLIC_ROUTE}/user/updatePatrimony`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'authorization': `Bearer ${user.token}`
+				},
+				body: JSON.stringify(data)
+			})
+		} else {
+			const response = await getPatrimony(email)
+			const patrimony = response + value
+			const data = { email, patrimony }
+			await fetch(`${process.env.NEXT_PUBLIC_ROUTE}/user/updatePatrimony`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'authorization': `Bearer ${user.token}`
+				},
+				body: JSON.stringify(data)
+			})
+		}
+
+	}
+
 	useEffect(() => {
 		if (user.token !== '') {
 			getTransactions(user.email)
@@ -81,7 +113,8 @@ export function TransactionProvider(props: { children: React.ReactNode }) {
 			transactions,
 			getTransactions,
 			getSearchTransactions,
-			sendTransaction
+			sendTransaction,
+			updatePatrimony
 		}}>
 			{props.children}
 		</TransactionContext.Provider>
