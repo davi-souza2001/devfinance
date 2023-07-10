@@ -49,12 +49,10 @@ Ele deve consultar para verificar quanto eu terei se comprar x coisa
 -->
 
 <!-- 
-- [] Adicionar datas as transferencias
-- [] Adicionar calculo para saber o total que você tem e quanto que foi gasto no todo
 - [] Adicionar um formatador melhor para valores decimais
-- [] Adicionar as transferencias de cada mes registrado na tela principal
 
  Optional:
+ - [] Adicionar imagem na conta
  - [] Adicionar um loading
  - [] Adicionar um toast para mensagens de erro
  - [] Adicionar componente de tabela unificado
