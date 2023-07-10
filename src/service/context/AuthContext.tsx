@@ -25,6 +25,7 @@ interface UserLogin {
 interface AuthContextProps {
 	user: User
 	loading: boolean
+	patrimony: number
 	getPatrimony: (email: string) => Promise<number>
 	registerUser: (data: User) => Promise<void>
 	loginUser: (data: UserLogin) => Promise<void>
@@ -40,6 +41,7 @@ const AuthContext = createContext<AuthContextProps>({
 		patrimony: 0
 	},
 	loading: false,
+	patrimony: 0,
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	registerUser: async () => { },
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -54,6 +56,7 @@ const tokenBase = 'tokenAuthFinance'
 export function AuthProvider(props: { children: React.ReactNode }) {
 	const token = getCookie(tokenBase)?.toString()
 	const [loading, setLoading] = useState<boolean>(false)
+	const [patrimony, setPatrimony] = useState<number>(0)
 	const [user, setUser] = useState<User>({
 		name: '',
 		email: '',
@@ -123,7 +126,7 @@ export function AuthProvider(props: { children: React.ReactNode }) {
 		})
 
 		const resolve = await response.json()
-		setUser({ ...user, patrimony: resolve.patrimony })
+		setPatrimony(resolve.patrimony)
 
 		return resolve.patrimony
 	}
@@ -151,6 +154,7 @@ export function AuthProvider(props: { children: React.ReactNode }) {
 			registerUser,
 			getPatrimony,
 			loginUser,
+			patrimony,
 			logoutUser
 		}}>
 			{props.children}

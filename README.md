@@ -49,8 +49,9 @@ Ele deve consultar para verificar quanto eu terei se comprar x coisa
 -->
 
 <!-- 
-- [] Criar hash para senha de usuário
-- [] Adicionar novas rotas para calcular as funções
+- [] Adicionar datas as transferencias
+- [] Adicionar calculo para saber o total que você tem e quanto que foi gasto no todo
+- [] Adicionar as transferencias de cada mes registrado na tela principal
 
  Optional:
  - [] Adicionar um loading
