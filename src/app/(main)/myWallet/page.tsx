@@ -12,6 +12,7 @@ export default function MyWallet() {
 	const { user, getPatrimony } = UseAuth()
 	const { transactions } = UseTransaction()
 	const [recurrents, setRecurrents] = useState<Transaction[]>([])
+	const [expenses, setExpenses] = useState<number>(0)
 
 	useEffect(() => {
 		const filterRecurrent = transactions.filter((transaction) => transaction.recurrent === true)
@@ -20,6 +21,11 @@ export default function MyWallet() {
 		if (user.email !== '') {
 			getPatrimony(user.email)
 		}
+
+		const filterExpenses = transactions.filter((transaction) => transaction.expense === true)
+		const expenses = filterExpenses.reduce((acc, curr) => acc + curr.value, 0)
+		setExpenses(expenses)
+
 	}, [transactions])
 
 	return (
@@ -34,7 +40,7 @@ export default function MyWallet() {
 			</div>
 			<div className="w-3/3 lg:w-1/2 flex flex-col m-10 p-5 bg-purpleHeader rounded">
 				<span className="flex items-center text-xl mb-3 font-semibold">My Expenses<HiMinusCircle className="ml-5 text-2xl text-red-500" /> </span>
-				<span className="text-2xl font-semibold">R$ 00,00</span>
+				<span className="text-2xl font-semibold">R$ {expenses === 0 ? '00' : expenses},00</span>
 			</div>
 			<div className="w-3/3 lg:w-1/2 flex flex-col m-10 p-5 bg-purpleHeader rounded">
 				<span className="text-xl font-semibold">Fixed Expenses</span>
