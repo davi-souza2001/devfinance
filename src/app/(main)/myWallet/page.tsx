@@ -25,10 +25,6 @@ export default function MyWallet() {
 				<span className="font-light text-slate-400">Here you can check your equity and how much is estimated for next month profits.</span>
 			</div>
 			<div className="w-3/3 lg:w-1/2 flex flex-col m-10 p-5 bg-purpleHeader rounded">
-				<span className="flex items-center text-xl mb-3 font-semibold">My Patrimony<HiCurrencyDollar className="ml-5 text-2xl" /> </span>
-				<span className="text-2xl font-semibold">R$ {user.patrimony ?? 0},00</span>
-			</div>
-			<div className="w-3/3 lg:w-1/2 flex flex-col m-10 p-5 bg-purpleHeader rounded">
 				<span className="flex items-center text-xl mb-3 font-semibold">Total<HiSortAscending className="ml-5 text-2xl text-green-500" /> </span>
 				<span className="text-2xl font-semibold">R$ {user.patrimony ?? 0},00</span>
 			</div>
