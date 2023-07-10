@@ -53,5 +53,7 @@ Ele deve consultar para verificar quanto eu terei se comprar x coisa
 - [] Adicionar novas rotas para calcular as funções
 
  Optional:
+ - [] Adicionar um loading
+ - [] Adicionar um toast para mensagens de erro
  - [] Adicionar componente de tabela unificado
 -->

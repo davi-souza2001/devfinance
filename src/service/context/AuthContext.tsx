@@ -94,15 +94,21 @@ export function AuthProvider(props: { children: React.ReactNode }) {
 
 		const userToken = await response.json()
 
-		const user = decode(userToken.token) as User
+		if (userToken.token) {
+			const user = decode(userToken.token) as User
 
-		setUser(user)
+			setUser(user)
 
-		setCookie(tokenBase, userToken.token, {
-			expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7)
-		})
+			setCookie(tokenBase, userToken.token, {
+				expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7)
+			})
+			setLoading(false)
+		} else {
+			setLoading(false)
 
-		setLoading(false)
+			throw new Error('User not found, please check your email and password.')
+		}
+
 	}
 
 	async function getPatrimony(email: string) {

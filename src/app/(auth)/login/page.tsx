@@ -28,8 +28,12 @@ export default function Login() {
 	})
 
 	async function handleLoginUser(data: CreateUserFormData) {
-		await loginUser(data)
-		push('/')
+		try {
+			await loginUser(data)
+			push('/')
+		} catch (error: any) {
+			alert(error.message)
+		}
 	}
 
 	return (
@@ -45,8 +49,8 @@ export default function Login() {
 					</defs>
 				</svg>
 				<div className="h-full w-full hidden lg:flex items-start justify-center flex-col text-center lg:mx-0 lg:flex-auto lg:py-32 lg:text-left ">
-					<h2 className="text-2xl font-bold tracking-tight text-white sm:text-5xl">Boost your productivity.<br />Start using our app today.</h2>
-					<p className="mt-6 text-xl leading-8 text-gray-300">Ac euismod vel sit maecenas id pellentesque eu sed consectetur. Malesuada adipiscing sagittis vel nulla.</p>
+					<h2 className="text-2xl font-bold tracking-tight text-white sm:text-5xl">Boost your financial control, start using our app today.</h2>
+					<p className="mt-6 text-xl leading-8 text-gray-300">With DevFinance, you can manage your transfers in a simple and fast way.</p>
 					<div className="mt-10 flex flex-col items-center justify-center gap-x-6lg:justify-start">
 						<Link href="/register" className="rounded-md bg-white px-3.5 py-2.5 text-base font-semibold text-gray-900 shadow-sm mb-2 hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Get started</Link>
 						<Link href="https://github.com/davi-souza2001/devfinance" target={'_blank'} className="text-base font-semibold leading-6 text-white">Learn more <span aria-hidden="true">→</span></Link>
