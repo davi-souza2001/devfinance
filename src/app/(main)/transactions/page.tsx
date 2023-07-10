@@ -53,7 +53,8 @@ export default function Transactions() {
 	})
 
 	async function handleSendTransaction(data: CreateTransactionFormData) {
-		const send = await sendTransaction(data, user.email)
+		const dataWithDate = { ...data, date: new Date().getTime() }
+		const send = await sendTransaction(dataWithDate, user.email)
 		const get = await getTransactions(user.email)
 		const update = await updatePatrimony(user.email, data.value, data.expense)
 		const getP = await getPatrimony(user.email)

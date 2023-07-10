@@ -39,11 +39,7 @@ export function TransactionProvider(props: { children: React.ReactNode }) {
 	const { user, getPatrimony } = UseAuth()
 
 	async function sendTransaction(data: Transaction, email: string) {
-		const transaction = {
-			...data,
-			emailUser: email,
-			date: new Date().getTime()
-		}
+		const transaction = { ...data, emailUser: email }
 		await fetch(`${process.env.NEXT_PUBLIC_ROUTE}/expenses/create`, {
 			method: 'POST',
 			headers: {
