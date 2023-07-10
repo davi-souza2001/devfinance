@@ -8,17 +8,39 @@ import UseAuth from '@/service/hooks/useAuth'
 import UseTransaction from '@/service/hooks/useTransaction'
 
 export default function Home() {
-	const { patrimony } = UseAuth()
+	const { patrimony, getPatrimony, user } = UseAuth()
 	const { transactions } = UseTransaction()
 	const [totalExpense, setTotalExpense] = useState<number>(0)
 
+	function filterValueDate(month: number) {
+		const transactionsInMonth = transactions.filter((transaction) => {
+			const transactionDate = new Date(transaction.date)
+			const transactionMonth = transactionDate.getMonth()
+			if (transactionMonth === month) {
+				return transactionMonth
+			}
+		})
+
+		const totalExpense = transactionsInMonth.reduce((acc, curr) => acc + curr.value, 0)
+
+		return totalExpense
+	}
 	useEffect(() => {
 		const filterExpenses = transactions.filter((transaction) => transaction.expense === true)
 		const filterTotalExpense = filterExpenses.reduce((acc, curr) => acc + curr.value, 0)
 
 		setTotalExpense(filterTotalExpense)
 
+		filterValueDate(6)
+
 	}, [transactions])
+
+	useEffect(() => {
+		if (user.email !== '') {
+			getPatrimony(user.email)
+		}
+
+	}, [user])
 
 	return (
 		<DefaultBackground>
@@ -63,18 +85,54 @@ export default function Home() {
 				</div>
 				<div className="w-full flex flex-col mt-10 p-5 bg-purpleHeader rounded">
 					<span className="text-xl mb-3 font-semibold">Analytics</span>
-					<span className="font-thin">Jan - R$ 52,00</span>
-					<Progress colorScheme='blue' height='22px' value={20} className="mb-3 rounded outline-none border-none" />
-					<span className="font-thin">Fev - R$ 52,00</span>
-					<Progress colorScheme='blue' height='22px' value={20} className="mb-3 rounded outline-none border-none" />
-					<span className="font-thin">Mar - R$ 52,00</span>
-					<Progress colorScheme='blue' height='22px' value={20} className="mb-3 rounded outline-none border-none" />
-					<span className="font-thin">Abr - R$ 52,00</span>
-					<Progress colorScheme='blue' height='22px' value={20} className="mb-3 rounded outline-none border-none" />
-					<span className="font-thin">Mai - R$ 52,00</span>
-					<Progress colorScheme='blue' height='22px' value={20} className="mb-3 rounded outline-none border-none" />
-					<span className="font-thin">Jun - R$ 52,00</span>
-					<Progress colorScheme='blue' height='22px' value={20} className="mb-3 rounded outline-none border-none" />
+					<span className="font-thin">
+						Jan - R$ {filterValueDate(1)},00
+					</span>
+					<Progress colorScheme='blue' height='22px' value={filterValueDate(1) / 100} className="mb-3 rounded outline-none border-none" />
+					<span className="font-thin">
+						Feb - R$ {filterValueDate(2)},00
+					</span>
+					<Progress colorScheme='blue' height='22px' value={filterValueDate(2) / 100} className="mb-3 rounded outline-none border-none" />
+					<span className="font-thin">
+						Mar - R$ {filterValueDate(3)},00
+					</span>
+					<Progress colorScheme='blue' height='22px' value={filterValueDate(3) / 100} className="mb-3 rounded outline-none border-none" />
+					<span className="font-thin">
+						Apr - R$ {filterValueDate(4)},00
+					</span>
+					<Progress colorScheme='blue' height='22px' value={filterValueDate(4) / 100} className="mb-3 rounded outline-none border-none" />
+					<span className="font-thin">
+						May - R$ {filterValueDate(5)},00
+					</span>
+					<Progress colorScheme='blue' height='22px' value={filterValueDate(5) / 100} className="mb-3 rounded outline-none border-none" />
+					<span className="font-thin">
+						Jun - R$ {filterValueDate(6)},00
+					</span>
+					<Progress colorScheme='blue' height='22px' value={filterValueDate(6) / 100} className="mb-3 rounded outline-none border-none" />
+					<span className="font-thin">
+						Jul - R$ {filterValueDate(7)},00
+					</span>
+					<Progress colorScheme='blue' height='22px' value={filterValueDate(7) / 100} className="mb-3 rounded outline-none border-none" />
+					<span className="font-thin">
+						Aug - R$ {filterValueDate(8)},00
+					</span>
+					<Progress colorScheme='blue' height='22px' value={filterValueDate(8) / 100} className="mb-3 rounded outline-none border-none" />
+					<span className="font-thin">
+						Sep - R$ {filterValueDate(9)},00
+					</span>
+					<Progress colorScheme='blue' height='22px' value={filterValueDate(9) / 100} className="mb-3 rounded outline-none border-none" />
+					<span className="font-thin">
+						Oct - R$ {filterValueDate(10)},00
+					</span>
+					<Progress colorScheme='blue' height='22px' value={filterValueDate(10) / 100} className="mb-3 rounded outline-none border-none" />
+					<span className="font-thin">
+						Nov - R$ {filterValueDate(11)},00
+					</span>
+					<Progress colorScheme='blue' height='22px' value={filterValueDate(11) / 100} className="mb-3 rounded outline-none border-none" />
+					<span className="font-thin">
+						Dec - R$ {filterValueDate(12)},00
+					</span>
+					<Progress colorScheme='blue' height='22px' value={filterValueDate(12) / 100} className="mb-3 rounded outline-none border-none" />
 				</div>
 				<div className="w-full mt-10 p-5 bg-purpleHeader rounded">
 					<span className="text-xl font-semibold">Transactions</span>
