@@ -30,7 +30,7 @@ type CreateUserFormData = z.infer<typeof createUserFormSchema>
 export default function Register() {
 	const { push } = useRouter()
 	const { registerUser } = UseAuth()
-	const { register, handleSubmit, formState: { errors } } = useForm<CreateUserFOrmData>({
+	const { register, handleSubmit, formState: { errors } } = useForm<CreateUserFormData>({
 		resolver: zodResolver(createUserFormSchema)
 	})
 
