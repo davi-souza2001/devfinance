@@ -98,7 +98,10 @@ export function AuthProvider(props: { children: React.ReactNode }) {
 
 		setUser(user)
 
-		setCookie(tokenBase, userToken.token)
+		setCookie(tokenBase, userToken.token, {
+			expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7)
+		})
+
 		setLoading(false)
 	}
 

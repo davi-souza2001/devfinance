@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { HiCurrencyDollar, HiMinusCircle, HiSortAscending } from 'react-icons/hi'
+import { HiMinusCircle, HiSortAscending } from 'react-icons/hi'
 import { Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
 
 import { DefaultBackground } from '@/components/DefaultBackground'
@@ -9,13 +9,17 @@ import UseTransaction from '@/service/hooks/useTransaction'
 import UseAuth from '@/service/hooks/useAuth'
 
 export default function MyWallet() {
-	const { user } = UseAuth()
+	const { user, getPatrimony } = UseAuth()
 	const { transactions } = UseTransaction()
 	const [recurrents, setRecurrents] = useState<Transaction[]>([])
 
 	useEffect(() => {
 		const filterRecurrent = transactions.filter((transaction) => transaction.recurrent === true)
 		setRecurrents(filterRecurrent)
+
+		if (user.email !== '') {
+			getPatrimony(user.email)
+		}
 	}, [transactions])
 
 	return (
@@ -30,7 +34,7 @@ export default function MyWallet() {
 			</div>
 			<div className="w-3/3 lg:w-1/2 flex flex-col m-10 p-5 bg-purpleHeader rounded">
 				<span className="flex items-center text-xl mb-3 font-semibold">My Expenses<HiMinusCircle className="ml-5 text-2xl text-red-500" /> </span>
-				<span className="text-2xl font-semibold">R$ 52,00</span>
+				<span className="text-2xl font-semibold">R$ 00,00</span>
 			</div>
 			<div className="w-3/3 lg:w-1/2 flex flex-col m-10 p-5 bg-purpleHeader rounded">
 				<span className="text-xl font-semibold">Fixed Expenses</span>
