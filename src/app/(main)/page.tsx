@@ -1,10 +1,25 @@
 'use client'
+import { useState, useEffect } from 'react'
 import { HiArrowCircleDown, HiArrowCircleUp } from 'react-icons/hi'
-import { Progress, Stat, StatArrow, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
+import { Progress, Table, TableContainer, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react'
 
 import { DefaultBackground } from '@/components/DefaultBackground'
+import UseAuth from '@/service/hooks/useAuth'
+import UseTransaction from '@/service/hooks/useTransaction'
 
 export default function Home() {
+	const { patrimony } = UseAuth()
+	const { transactions } = UseTransaction()
+	const [totalExpense, setTotalExpense] = useState<number>(0)
+
+	useEffect(() => {
+		const filterExpenses = transactions.filter((transaction) => transaction.expense === true)
+		const filterTotalExpense = filterExpenses.reduce((acc, curr) => acc + curr.value, 0)
+
+		setTotalExpense(filterTotalExpense)
+
+	}, [transactions])
+
 	return (
 		<DefaultBackground>
 			<div className="h-24 w-full p-5 flex flex-col items-start justify-center">
@@ -19,13 +34,13 @@ export default function Home() {
 							<span className="lg:hidden">Income</span>
 							<span className="hidden lg:block text-lg font-thin">Total Income</span>
 							<div className="flex items-center justify-center">
-								<span className="lg:text-xl">R$32,00</span>
-								<span className="hidden lg:flex ml-5 text-sm">
+								<span className="lg:text-xl">R${patrimony},00</span>
+								{/* <span className="hidden lg:flex ml-5 text-sm">
 									<Stat>
 										<StatArrow type='increase' />
 										23.36%
 									</Stat>
-								</span>
+								</span> */}
 							</div>
 						</div>
 					</div>
@@ -35,13 +50,13 @@ export default function Home() {
 							<span className="lg:hidden">Outcome</span>
 							<span className="hidden lg:block text-lg font-thin">Total Outcome</span>
 							<div className="flex items-center justify-center">
-								<span className="lg:text-xl">R$32,00</span>
-								<span className="hidden lg:flex ml-5 text-sm">
+								<span className="lg:text-xl">R${totalExpense},00</span>
+								{/* <span className="hidden lg:flex ml-5 text-sm">
 									<Stat>
 										<StatArrow type='decrease' />
 										23.36%
 									</Stat>
-								</span>
+								</span> */}
 							</div>
 						</div>
 					</div>

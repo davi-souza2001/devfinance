@@ -51,6 +51,7 @@ Ele deve consultar para verificar quanto eu terei se comprar x coisa
 <!-- 
 - [] Adicionar datas as transferencias
 - [] Adicionar calculo para saber o total que você tem e quanto que foi gasto no todo
+- [] Adicionar um formatador melhor para valores decimais
 - [] Adicionar as transferencias de cada mes registrado na tela principal
 
  Optional:

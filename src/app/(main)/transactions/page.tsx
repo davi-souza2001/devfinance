@@ -110,8 +110,8 @@ export default function Transactions() {
 
 									<label htmlFor="recurrent" className="font-semibold text-lg mb-2">Recurrent</label>
 									<select {...register('recurrent')} className="h-7 w-28 bg-slate-200 border-none outline-none rounded-sm mb-3">
-										<option value="yes">Yes</option>
 										<option value="no">No</option>
+										<option value="yes">Yes</option>
 									</select>
 									{errors.recurrent && <span>{errors.recurrent.message}</span>}
 
