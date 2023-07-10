@@ -15,7 +15,8 @@ export default function Home() {
 	const [transactionsExpenses, setTransactionsExpenses] = useState<Transaction[]>([])
 
 	function filterValueDate(month: number) {
-		const transactionsInMonth = transactions.filter((transaction) => {
+		const filterExpenses = transactions.filter((transaction) => transaction.expense === true)
+		const transactionsInMonth = filterExpenses.filter((transaction) => {
 			const transactionDate = new Date(transaction.date)
 			const transactionMonth = transactionDate.getMonth()
 			if (transactionMonth === month) {
@@ -143,7 +144,7 @@ export default function Home() {
 					</span>
 					<Progress colorScheme='blue' height='22px' value={filterValueDate(12) / 100} className="mb-3 rounded outline-none border-none" />
 				</div>
-				<div className="w-full mt-10 p-5 bg-purpleHeader rounded">
+				<div className="w-full mt-10 p-5 flex flex-col bg-purpleHeader rounded">
 					<span className="text-xl font-semibold">My Expenses</span>
 					{transactionsExpenses.length === 0 ? (
 						<span className="font-light text-slate-400 my-3">You don't have any expenses yet.</span>
