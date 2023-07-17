@@ -66,7 +66,7 @@ export default function Home() {
 							<span className="lg:hidden">Income</span>
 							<span className="hidden lg:block text-lg font-thin">Total Income</span>
 							<div className="flex items-center justify-center">
-								<span className="lg:text-xl">R${patrimony},00</span>
+								<span className="lg:text-xl">R$ {patrimony},00</span>
 								{/* <span className="hidden lg:flex ml-5 text-sm">
 									<Stat>
 										<StatArrow type='increase' />
@@ -82,7 +82,7 @@ export default function Home() {
 							<span className="lg:hidden">Outcome</span>
 							<span className="hidden lg:block text-lg font-thin">Total Outcome</span>
 							<div className="flex items-center justify-center">
-								<span className="lg:text-xl">R${totalExpense},00</span>
+								<span className="lg:text-xl">R$ {totalExpense},00</span>
 								{/* <span className="hidden lg:flex ml-5 text-sm">
 									<Stat>
 										<StatArrow type='decrease' />

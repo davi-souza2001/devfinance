@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from 'react'
+import { date } from 'zod'
 
 import UseAuth from '../hooks/useAuth'
 
@@ -18,6 +19,7 @@ interface TransactionProps {
 	sendTransaction: (data: Transaction, email: string) => Promise<void>
 	updatePatrimony: (email: string, value: number, expense: boolean) => Promise<void>
 	deleteTransaction: (id: string) => Promise<void>
+	resetExpense: () => Promise<void>
 }
 
 const TransactionContext = createContext<TransactionProps>({
@@ -31,7 +33,9 @@ const TransactionContext = createContext<TransactionProps>({
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	updatePatrimony: async () => { },
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
-	deleteTransaction: async () => { }
+	deleteTransaction: async () => { },
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	resetExpense: async () => { },
 })
 
 export function TransactionProvider(props: { children: React.ReactNode }) {
@@ -114,7 +118,20 @@ export function TransactionProvider(props: { children: React.ReactNode }) {
 				body: JSON.stringify(data)
 			})
 		}
+	}
 
+	async function resetExpense() {
+		const date = new Date().getDate()
+
+		const data = { email: user.email, date }
+		await fetch(`${process.env.NEXT_PUBLIC_ROUTE}/expenses/resetExpenses`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'authorization': `Bearer ${user.token}`
+			},
+			body: JSON.stringify(data)
+		})
 	}
 
 	useEffect(() => {
@@ -130,7 +147,8 @@ export function TransactionProvider(props: { children: React.ReactNode }) {
 			getSearchTransactions,
 			sendTransaction,
 			deleteTransaction,
-			updatePatrimony
+			updatePatrimony,
+			resetExpense
 		}}>
 			{props.children}
 		</TransactionContext.Provider>

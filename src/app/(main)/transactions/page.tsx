@@ -47,7 +47,7 @@ export default function Transactions() {
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const { user, getPatrimony } = UseAuth()
 	const [search, setSearch] = useState('')
-	const { sendTransaction, transactions, getTransactions, getSearchTransactions, updatePatrimony, deleteTransaction } = UseTransaction()
+	const { sendTransaction, transactions, getTransactions, getSearchTransactions, updatePatrimony, deleteTransaction, resetExpense } = UseTransaction()
 	const { register, handleSubmit, formState: { errors } } = useForm<CreateTransactionFormData>({
 		resolver: zodResolver(createTransactionFormSchema)
 	})
@@ -71,6 +71,13 @@ export default function Transactions() {
 		Promise.all([deleteT, get])
 	}
 
+	async function handleResetExpense() {
+		const resetE = await resetExpense()
+		const get = await getTransactions(user.email)
+
+		Promise.all([resetE, get])
+	}
+
 	async function searchTransactions() {
 		if (search === '') {
 			await getTransactions(user.email)
@@ -92,8 +99,9 @@ export default function Transactions() {
 				</div>
 			</div>
 			<div className="h-24 w-full lg:w-1/2 p-5 flex items-center justify-between">
-				<div className="p-1 rounded bg-[#232358]">
-					<Button onClick={onOpen} className="hover:bg-[#2f2f70]">Add Transaction</Button>
+				<div className="p-1 rounded">
+					<button onClick={handleResetExpense} className="p-2 m-3 mr-10 font-semibold bg-green-500 transition-all rounded hover:bg-green-600">Pay Expenses</button>
+					<Button onClick={onOpen} className="bg-[#232358] hover:bg-[#2f2f70]">Add Transaction</Button>
 					<Modal isOpen={isOpen} onClose={onClose}>
 						<ModalOverlay />
 						<ModalContent>
