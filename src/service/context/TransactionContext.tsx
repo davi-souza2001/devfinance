@@ -20,6 +20,7 @@ interface TransactionProps {
 	updatePatrimony: (email: string, value: number, expense: boolean) => Promise<void>
 	deleteTransaction: (id: string) => Promise<void>
 	resetExpense: () => Promise<void>
+	updateExpense: (expense: number) => Promise<void>
 }
 
 const TransactionContext = createContext<TransactionProps>({
@@ -36,6 +37,8 @@ const TransactionContext = createContext<TransactionProps>({
 	deleteTransaction: async () => { },
 	// eslint-disable-next-line @typescript-eslint/no-empty-function
 	resetExpense: async () => { },
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	updateExpense: async () => { },
 })
 
 export function TransactionProvider(props: { children: React.ReactNode }) {
@@ -93,21 +96,9 @@ export function TransactionProvider(props: { children: React.ReactNode }) {
 	}
 
 	async function updatePatrimony(email: string, value: number, expense: boolean) {
-		if (expense) {
+		if (!expense) {
 			const response = await getPatrimony(email)
-			const patrimony = response - value
-			const data = { email, patrimony }
-			await fetch(`${process.env.NEXT_PUBLIC_ROUTE}/user/updatePatrimony`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					'authorization': `Bearer ${user.token}`
-				},
-				body: JSON.stringify(data)
-			})
-		} else {
-			const response = await getPatrimony(email)
-			const patrimony = response + value
+			const patrimony = (response + value)
 			const data = { email, patrimony }
 			await fetch(`${process.env.NEXT_PUBLIC_ROUTE}/user/updatePatrimony`, {
 				method: 'POST',
@@ -134,6 +125,22 @@ export function TransactionProvider(props: { children: React.ReactNode }) {
 		})
 	}
 
+	async function updateExpense(expense: number) {
+		const data = {
+			email: user.email,
+			expense
+		}
+
+		await fetch(`${process.env.NEXT_PUBLIC_ROUTE}/user/updateExpense`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				'authorization': `Bearer ${user.token}`
+			},
+			body: JSON.stringify(data)
+		})
+	}
+
 	useEffect(() => {
 		if (user.token !== '') {
 			getTransactions(user.email)
@@ -148,7 +155,8 @@ export function TransactionProvider(props: { children: React.ReactNode }) {
 			sendTransaction,
 			deleteTransaction,
 			updatePatrimony,
-			resetExpense
+			resetExpense,
+			updateExpense
 		}}>
 			{props.children}
 		</TransactionContext.Provider>

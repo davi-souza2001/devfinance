@@ -47,7 +47,7 @@ export default function Transactions() {
 	const { isOpen, onOpen, onClose } = useDisclosure()
 	const { user, getPatrimony } = UseAuth()
 	const [search, setSearch] = useState('')
-	const { sendTransaction, transactions, getTransactions, getSearchTransactions, updatePatrimony, deleteTransaction, resetExpense } = UseTransaction()
+	const { sendTransaction, transactions, getTransactions, getSearchTransactions, updatePatrimony, deleteTransaction, resetExpense, updateExpense } = UseTransaction()
 	const { register, handleSubmit, formState: { errors } } = useForm<CreateTransactionFormData>({
 		resolver: zodResolver(createTransactionFormSchema)
 	})
@@ -56,10 +56,10 @@ export default function Transactions() {
 		const dataWithDate = { ...data, date: new Date().getTime() }
 		const send = await sendTransaction(dataWithDate, user.email)
 		const get = await getTransactions(user.email)
-		const update = await updatePatrimony(user.email, data.value, data.expense)
+		const updateP = await updatePatrimony(user.email, data.value, data.expense)
 		const getP = await getPatrimony(user.email)
 
-		Promise.all([send, get, update, getP])
+		Promise.all([send, get, updateP, getP])
 
 		onClose()
 	}
@@ -71,11 +71,15 @@ export default function Transactions() {
 		Promise.all([deleteT, get])
 	}
 
-	async function handleResetExpense() {
+	async function handlePayExpense() {
+		const filterRecurrentExpenses = transactions.filter((transaction) => transaction.expense === true)
+		const expenses = filterRecurrentExpenses.reduce((acc, curr) => acc + curr.value, 0)
+
 		const resetE = await resetExpense()
+		const updateE = await updateExpense(expenses)
 		const get = await getTransactions(user.email)
 
-		Promise.all([resetE, get])
+		Promise.all([resetE, updateE, get])
 	}
 
 	async function searchTransactions() {
@@ -100,7 +104,9 @@ export default function Transactions() {
 			</div>
 			<div className="h-24 w-full lg:w-1/2 p-5 flex items-center justify-between">
 				<div className="p-1 rounded">
-					<button onClick={handleResetExpense} className="p-2 m-3 mr-10 font-semibold bg-green-500 transition-all rounded hover:bg-green-600">Pay Expenses</button>
+					<button onClick={handlePayExpense} className="p-2 m-3 mr-10 font-semibold bg-green-500 transition-all rounded hover:bg-green-600">
+						Pay Expenses
+					</button>
 					<Button onClick={onOpen} className="bg-[#232358] hover:bg-[#2f2f70]">Add Transaction</Button>
 					<Modal isOpen={isOpen} onClose={onClose}>
 						<ModalOverlay />
