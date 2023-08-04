@@ -50,10 +50,11 @@ Ele deve consultar para verificar quanto eu terei se comprar x coisa
 
 <!-- 
 - [] Adicionar um formatador melhor para valores decimais
-
+asd
  Optional:
  - [] Adicionar imagem na conta
  - [] Adicionar um loading
  - [] Adicionar um toast para mensagens de erro
  - [] Adicionar componente de tabela unificado
 -->
+
